@@ -1,0 +1,32 @@
+[
+{
+  "directory": "/home/massonskyi/sp2024/math_imp/build",
+  "command": "/usr/bin/g++  -I/home/massonskyi/sp2024/math_imp/include -g -std=gnu++23 -o CMakeFiles/math_interpreter.dir/src/mod/objects.cpp.o -c /home/massonskyi/sp2024/math_imp/src/mod/objects.cpp",
+  "file": "/home/massonskyi/sp2024/math_imp/src/mod/objects.cpp",
+  "output": "CMakeFiles/math_interpreter.dir/src/mod/objects.cpp.o"
+},
+{
+  "directory": "/home/massonskyi/sp2024/math_imp/build",
+  "command": "/usr/bin/g++  -I/home/massonskyi/sp2024/math_imp/include -g -std=gnu++23 -o CMakeFiles/math_interpreter.dir/src/core.cpp.o -c /home/massonskyi/sp2024/math_imp/src/core.cpp",
+  "file": "/home/massonskyi/sp2024/math_imp/src/core.cpp",
+  "output": "CMakeFiles/math_interpreter.dir/src/core.cpp.o"
+},
+{
+  "directory": "/home/massonskyi/sp2024/math_imp/build",
+  "command": "/usr/bin/g++  -I/home/massonskyi/sp2024/math_imp/include -g -std=gnu++23 -o CMakeFiles/math_interpreter.dir/src/io.cpp.o -c /home/massonskyi/sp2024/math_imp/src/io.cpp",
+  "file": "/home/massonskyi/sp2024/math_imp/src/io.cpp",
+  "output": "CMakeFiles/math_interpreter.dir/src/io.cpp.o"
+},
+{
+  "directory": "/home/massonskyi/sp2024/math_imp/build",
+  "command": "/usr/bin/g++  -I/home/massonskyi/sp2024/math_imp/include -g -std=gnu++23 -o CMakeFiles/math_interpreter.dir/src/handler.cpp.o -c /home/massonskyi/sp2024/math_imp/src/handler.cpp",
+  "file": "/home/massonskyi/sp2024/math_imp/src/handler.cpp",
+  "output": "CMakeFiles/math_interpreter.dir/src/handler.cpp.o"
+},
+{
+  "directory": "/home/massonskyi/sp2024/math_imp/build",
+  "command": "/usr/bin/g++  -I/home/massonskyi/sp2024/math_imp/include -g -std=gnu++23 -o CMakeFiles/math_interpreter.dir/main.cpp.o -c /home/massonskyi/sp2024/math_imp/main.cpp",
+  "file": "/home/massonskyi/sp2024/math_imp/main.cpp",
+  "output": "CMakeFiles/math_interpreter.dir/main.cpp.o"
+}
+]

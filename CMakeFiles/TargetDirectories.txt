@@ -1,0 +1,3 @@
+/home/massonskyi/sp2024/math_imp/CMakeFiles/math_interpreter.dir
+/home/massonskyi/sp2024/math_imp/CMakeFiles/edit_cache.dir
+/home/massonskyi/sp2024/math_imp/CMakeFiles/rebuild_cache.dir
