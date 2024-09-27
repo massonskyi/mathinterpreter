@@ -46,45 +46,45 @@
     - [C++](https://isocpp.org/)
 
 
-    ## ✅ Requirements ##
+  ## ✅ Requirements ##
 
-      Before you begin, ensure you have the following installed:
+    Before you begin, ensure you have the following installed:
 
-      - [Git](https://git-scm.com)
-      - [CMake](https://cmake.org/)
-      - [Python](https://www.python.org/)
+    - [Git](https://git-scm.com)
+    - [CMake](https://cmake.org/)
+    - [Python](https://www.python.org/)
 
 
-    ## 🛠️ Building and Running ##
+  ## 🛠️ Building and Running ##
 
-    Follow these steps to build and run Math_imp using C++:
+  Follow these steps to build and run Math_imp using C++:
 
-    ```bash
-    # Clone this project
-    $ git clone https://github.com/massonskyi/mathinterpreter.git
-
-    # Access the project directory
-    $ cd math_imp
-
-    # Create a build directory
-    $ mkdir build && cd build
-
-    # Configure the project
-    $ cmake ..
-
-    # Build the project
-    $ make
-
-    # Run the project
-    $ ./math_imp
+  ```bash
+  # Clone this project
+  $ git clone https://github.com/massonskyi/mathinterpreter.git
+  
+  # Access the project directory
+  $ cd math_imp
+  
+  # Create a build directory
+  $ mkdir build && cd build
+  
+  # Configure the project
+  $ cmake ..
+  
+  # Build the project
+  $ make
+  
+  # Run the project
+  $ ./math_imp
     ```
 
-  ## 📝 License ##
+## 📝 License ##
 
   This project is licensed under the MIT License. For more details, see the [LICENSE](LICENSE.md) file.
-
+  
   Made with ❤️ by [{{YOUR_NAME}}](https://github.com/massonskyi)
-
+  
   &#xa0;
-
+  
   <a href="#top">Back to top</a>
