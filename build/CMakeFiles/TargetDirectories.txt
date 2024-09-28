@@ -1,8 +1,0 @@
-/home/massonsky/sp2024/mathinterpreter/build/CMakeFiles/math_interpreter.dir
-/home/massonsky/sp2024/mathinterpreter/build/CMakeFiles/test_vector.dir
-/home/massonsky/sp2024/mathinterpreter/build/CMakeFiles/test_matrix.dir
-/home/massonsky/sp2024/mathinterpreter/build/CMakeFiles/test_rational.dir
-/home/massonsky/sp2024/mathinterpreter/build/CMakeFiles/test_interpreter.dir
-/home/massonsky/sp2024/mathinterpreter/build/CMakeFiles/test.dir
-/home/massonsky/sp2024/mathinterpreter/build/CMakeFiles/edit_cache.dir
-/home/massonsky/sp2024/mathinterpreter/build/CMakeFiles/rebuild_cache.dir

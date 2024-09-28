@@ -1,1 +1,0 @@
-/usr/bin/c++ CMakeFiles/math_interpreter.dir/src/mod/objects.cpp.o CMakeFiles/math_interpreter.dir/src/core.cpp.o CMakeFiles/math_interpreter.dir/src/io.cpp.o CMakeFiles/math_interpreter.dir/src/handler.cpp.o CMakeFiles/math_interpreter.dir/main.cpp.o -o math_interpreter 
