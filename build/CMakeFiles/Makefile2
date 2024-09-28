@@ -54,16 +54,20 @@ RM = /usr/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/massonskyi/sp2024/math_imp
+CMAKE_SOURCE_DIR = /home/massonsky/sp2024/mathinterpreter
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/massonskyi/sp2024/math_imp/build
+CMAKE_BINARY_DIR = /home/massonsky/sp2024/mathinterpreter/build
 
 #=============================================================================
 # Directory level rules for the build root directory
 
 # The main recursive "all" target.
 all: CMakeFiles/math_interpreter.dir/all
+all: CMakeFiles/test_vector.dir/all
+all: CMakeFiles/test_matrix.dir/all
+all: CMakeFiles/test_rational.dir/all
+all: CMakeFiles/test_interpreter.dir/all
 .PHONY : all
 
 # The main recursive "preinstall" target.
@@ -72,6 +76,10 @@ preinstall:
 
 # The main recursive "clean" target.
 clean: CMakeFiles/math_interpreter.dir/clean
+clean: CMakeFiles/test_vector.dir/clean
+clean: CMakeFiles/test_matrix.dir/clean
+clean: CMakeFiles/test_rational.dir/clean
+clean: CMakeFiles/test_interpreter.dir/clean
 .PHONY : clean
 
 #=============================================================================
@@ -81,14 +89,14 @@ clean: CMakeFiles/math_interpreter.dir/clean
 CMakeFiles/math_interpreter.dir/all:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/math_interpreter.dir/build.make CMakeFiles/math_interpreter.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/math_interpreter.dir/build.make CMakeFiles/math_interpreter.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/massonskyi/sp2024/math_imp/build/CMakeFiles --progress-num=1,2,3,4,5,6 "Built target math_interpreter"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/massonsky/sp2024/mathinterpreter/build/CMakeFiles --progress-num=1,2,3,4,5,6,7 "Built target math_interpreter"
 .PHONY : CMakeFiles/math_interpreter.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/math_interpreter.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/massonskyi/sp2024/math_imp/build/CMakeFiles 6
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/massonsky/sp2024/mathinterpreter/build/CMakeFiles 7
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/math_interpreter.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/massonskyi/sp2024/math_imp/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/massonsky/sp2024/mathinterpreter/build/CMakeFiles 0
 .PHONY : CMakeFiles/math_interpreter.dir/rule
 
 # Convenience name for target.
@@ -99,6 +107,110 @@ math_interpreter: CMakeFiles/math_interpreter.dir/rule
 CMakeFiles/math_interpreter.dir/clean:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/math_interpreter.dir/build.make CMakeFiles/math_interpreter.dir/clean
 .PHONY : CMakeFiles/math_interpreter.dir/clean
+
+#=============================================================================
+# Target rules for target CMakeFiles/test_vector.dir
+
+# All Build rule for target.
+CMakeFiles/test_vector.dir/all:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_vector.dir/build.make CMakeFiles/test_vector.dir/depend
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_vector.dir/build.make CMakeFiles/test_vector.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/massonsky/sp2024/mathinterpreter/build/CMakeFiles --progress-num=15,16 "Built target test_vector"
+.PHONY : CMakeFiles/test_vector.dir/all
+
+# Build rule for subdir invocation for target.
+CMakeFiles/test_vector.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/massonsky/sp2024/mathinterpreter/build/CMakeFiles 2
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/test_vector.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/massonsky/sp2024/mathinterpreter/build/CMakeFiles 0
+.PHONY : CMakeFiles/test_vector.dir/rule
+
+# Convenience name for target.
+test_vector: CMakeFiles/test_vector.dir/rule
+.PHONY : test_vector
+
+# clean rule for target.
+CMakeFiles/test_vector.dir/clean:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_vector.dir/build.make CMakeFiles/test_vector.dir/clean
+.PHONY : CMakeFiles/test_vector.dir/clean
+
+#=============================================================================
+# Target rules for target CMakeFiles/test_matrix.dir
+
+# All Build rule for target.
+CMakeFiles/test_matrix.dir/all:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_matrix.dir/build.make CMakeFiles/test_matrix.dir/depend
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_matrix.dir/build.make CMakeFiles/test_matrix.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/massonsky/sp2024/mathinterpreter/build/CMakeFiles --progress-num=11,12 "Built target test_matrix"
+.PHONY : CMakeFiles/test_matrix.dir/all
+
+# Build rule for subdir invocation for target.
+CMakeFiles/test_matrix.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/massonsky/sp2024/mathinterpreter/build/CMakeFiles 2
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/test_matrix.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/massonsky/sp2024/mathinterpreter/build/CMakeFiles 0
+.PHONY : CMakeFiles/test_matrix.dir/rule
+
+# Convenience name for target.
+test_matrix: CMakeFiles/test_matrix.dir/rule
+.PHONY : test_matrix
+
+# clean rule for target.
+CMakeFiles/test_matrix.dir/clean:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_matrix.dir/build.make CMakeFiles/test_matrix.dir/clean
+.PHONY : CMakeFiles/test_matrix.dir/clean
+
+#=============================================================================
+# Target rules for target CMakeFiles/test_rational.dir
+
+# All Build rule for target.
+CMakeFiles/test_rational.dir/all:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_rational.dir/build.make CMakeFiles/test_rational.dir/depend
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_rational.dir/build.make CMakeFiles/test_rational.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/massonsky/sp2024/mathinterpreter/build/CMakeFiles --progress-num=13,14 "Built target test_rational"
+.PHONY : CMakeFiles/test_rational.dir/all
+
+# Build rule for subdir invocation for target.
+CMakeFiles/test_rational.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/massonsky/sp2024/mathinterpreter/build/CMakeFiles 2
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/test_rational.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/massonsky/sp2024/mathinterpreter/build/CMakeFiles 0
+.PHONY : CMakeFiles/test_rational.dir/rule
+
+# Convenience name for target.
+test_rational: CMakeFiles/test_rational.dir/rule
+.PHONY : test_rational
+
+# clean rule for target.
+CMakeFiles/test_rational.dir/clean:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_rational.dir/build.make CMakeFiles/test_rational.dir/clean
+.PHONY : CMakeFiles/test_rational.dir/clean
+
+#=============================================================================
+# Target rules for target CMakeFiles/test_interpreter.dir
+
+# All Build rule for target.
+CMakeFiles/test_interpreter.dir/all:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_interpreter.dir/build.make CMakeFiles/test_interpreter.dir/depend
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_interpreter.dir/build.make CMakeFiles/test_interpreter.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/massonsky/sp2024/mathinterpreter/build/CMakeFiles --progress-num=8,9,10 "Built target test_interpreter"
+.PHONY : CMakeFiles/test_interpreter.dir/all
+
+# Build rule for subdir invocation for target.
+CMakeFiles/test_interpreter.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/massonsky/sp2024/mathinterpreter/build/CMakeFiles 3
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/test_interpreter.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/massonsky/sp2024/mathinterpreter/build/CMakeFiles 0
+.PHONY : CMakeFiles/test_interpreter.dir/rule
+
+# Convenience name for target.
+test_interpreter: CMakeFiles/test_interpreter.dir/rule
+.PHONY : test_interpreter
+
+# clean rule for target.
+CMakeFiles/test_interpreter.dir/clean:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_interpreter.dir/build.make CMakeFiles/test_interpreter.dir/clean
+.PHONY : CMakeFiles/test_interpreter.dir/clean
 
 #=============================================================================
 # Special targets to cleanup operation of make.

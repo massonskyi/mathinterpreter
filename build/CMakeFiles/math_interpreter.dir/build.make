@@ -53,10 +53,10 @@ RM = /usr/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/massonskyi/sp2024/math_imp
+CMAKE_SOURCE_DIR = /home/massonsky/sp2024/mathinterpreter
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/massonskyi/sp2024/math_imp/build
+CMAKE_BINARY_DIR = /home/massonsky/sp2024/mathinterpreter/build
 
 # Include any dependencies generated for this target.
 include CMakeFiles/math_interpreter.dir/depend.make
@@ -69,95 +69,111 @@ include CMakeFiles/math_interpreter.dir/progress.make
 # Include the compile flags for this target's objects.
 include CMakeFiles/math_interpreter.dir/flags.make
 
-CMakeFiles/math_interpreter.dir/src/mod/objects.cpp.o: CMakeFiles/math_interpreter.dir/flags.make
-CMakeFiles/math_interpreter.dir/src/mod/objects.cpp.o: /home/massonskyi/sp2024/math_imp/src/mod/objects.cpp
-CMakeFiles/math_interpreter.dir/src/mod/objects.cpp.o: CMakeFiles/math_interpreter.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/massonskyi/sp2024/math_imp/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/math_interpreter.dir/src/mod/objects.cpp.o"
-	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/math_interpreter.dir/src/mod/objects.cpp.o -MF CMakeFiles/math_interpreter.dir/src/mod/objects.cpp.o.d -o CMakeFiles/math_interpreter.dir/src/mod/objects.cpp.o -c /home/massonskyi/sp2024/math_imp/src/mod/objects.cpp
+CMakeFiles/math_interpreter.dir/src/mod/objects.c.o: CMakeFiles/math_interpreter.dir/flags.make
+CMakeFiles/math_interpreter.dir/src/mod/objects.c.o: /home/massonsky/sp2024/mathinterpreter/src/mod/objects.c
+CMakeFiles/math_interpreter.dir/src/mod/objects.c.o: CMakeFiles/math_interpreter.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/massonsky/sp2024/mathinterpreter/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building C object CMakeFiles/math_interpreter.dir/src/mod/objects.c.o"
+	/usr/bin/gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/math_interpreter.dir/src/mod/objects.c.o -MF CMakeFiles/math_interpreter.dir/src/mod/objects.c.o.d -o CMakeFiles/math_interpreter.dir/src/mod/objects.c.o -c /home/massonsky/sp2024/mathinterpreter/src/mod/objects.c
 
-CMakeFiles/math_interpreter.dir/src/mod/objects.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/math_interpreter.dir/src/mod/objects.cpp.i"
-	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/massonskyi/sp2024/math_imp/src/mod/objects.cpp > CMakeFiles/math_interpreter.dir/src/mod/objects.cpp.i
+CMakeFiles/math_interpreter.dir/src/mod/objects.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/math_interpreter.dir/src/mod/objects.c.i"
+	/usr/bin/gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/massonsky/sp2024/mathinterpreter/src/mod/objects.c > CMakeFiles/math_interpreter.dir/src/mod/objects.c.i
 
-CMakeFiles/math_interpreter.dir/src/mod/objects.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/math_interpreter.dir/src/mod/objects.cpp.s"
-	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/massonskyi/sp2024/math_imp/src/mod/objects.cpp -o CMakeFiles/math_interpreter.dir/src/mod/objects.cpp.s
+CMakeFiles/math_interpreter.dir/src/mod/objects.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/math_interpreter.dir/src/mod/objects.c.s"
+	/usr/bin/gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/massonsky/sp2024/mathinterpreter/src/mod/objects.c -o CMakeFiles/math_interpreter.dir/src/mod/objects.c.s
 
 CMakeFiles/math_interpreter.dir/src/core.cpp.o: CMakeFiles/math_interpreter.dir/flags.make
-CMakeFiles/math_interpreter.dir/src/core.cpp.o: /home/massonskyi/sp2024/math_imp/src/core.cpp
+CMakeFiles/math_interpreter.dir/src/core.cpp.o: /home/massonsky/sp2024/mathinterpreter/src/core.cpp
 CMakeFiles/math_interpreter.dir/src/core.cpp.o: CMakeFiles/math_interpreter.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/massonskyi/sp2024/math_imp/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/math_interpreter.dir/src/core.cpp.o"
-	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/math_interpreter.dir/src/core.cpp.o -MF CMakeFiles/math_interpreter.dir/src/core.cpp.o.d -o CMakeFiles/math_interpreter.dir/src/core.cpp.o -c /home/massonskyi/sp2024/math_imp/src/core.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/massonsky/sp2024/mathinterpreter/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/math_interpreter.dir/src/core.cpp.o"
+	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/math_interpreter.dir/src/core.cpp.o -MF CMakeFiles/math_interpreter.dir/src/core.cpp.o.d -o CMakeFiles/math_interpreter.dir/src/core.cpp.o -c /home/massonsky/sp2024/mathinterpreter/src/core.cpp
 
 CMakeFiles/math_interpreter.dir/src/core.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/math_interpreter.dir/src/core.cpp.i"
-	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/massonskyi/sp2024/math_imp/src/core.cpp > CMakeFiles/math_interpreter.dir/src/core.cpp.i
+	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/massonsky/sp2024/mathinterpreter/src/core.cpp > CMakeFiles/math_interpreter.dir/src/core.cpp.i
 
 CMakeFiles/math_interpreter.dir/src/core.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/math_interpreter.dir/src/core.cpp.s"
-	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/massonskyi/sp2024/math_imp/src/core.cpp -o CMakeFiles/math_interpreter.dir/src/core.cpp.s
+	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/massonsky/sp2024/mathinterpreter/src/core.cpp -o CMakeFiles/math_interpreter.dir/src/core.cpp.s
 
 CMakeFiles/math_interpreter.dir/src/io.cpp.o: CMakeFiles/math_interpreter.dir/flags.make
-CMakeFiles/math_interpreter.dir/src/io.cpp.o: /home/massonskyi/sp2024/math_imp/src/io.cpp
+CMakeFiles/math_interpreter.dir/src/io.cpp.o: /home/massonsky/sp2024/mathinterpreter/src/io.cpp
 CMakeFiles/math_interpreter.dir/src/io.cpp.o: CMakeFiles/math_interpreter.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/massonskyi/sp2024/math_imp/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/math_interpreter.dir/src/io.cpp.o"
-	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/math_interpreter.dir/src/io.cpp.o -MF CMakeFiles/math_interpreter.dir/src/io.cpp.o.d -o CMakeFiles/math_interpreter.dir/src/io.cpp.o -c /home/massonskyi/sp2024/math_imp/src/io.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/massonsky/sp2024/mathinterpreter/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/math_interpreter.dir/src/io.cpp.o"
+	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/math_interpreter.dir/src/io.cpp.o -MF CMakeFiles/math_interpreter.dir/src/io.cpp.o.d -o CMakeFiles/math_interpreter.dir/src/io.cpp.o -c /home/massonsky/sp2024/mathinterpreter/src/io.cpp
 
 CMakeFiles/math_interpreter.dir/src/io.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/math_interpreter.dir/src/io.cpp.i"
-	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/massonskyi/sp2024/math_imp/src/io.cpp > CMakeFiles/math_interpreter.dir/src/io.cpp.i
+	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/massonsky/sp2024/mathinterpreter/src/io.cpp > CMakeFiles/math_interpreter.dir/src/io.cpp.i
 
 CMakeFiles/math_interpreter.dir/src/io.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/math_interpreter.dir/src/io.cpp.s"
-	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/massonskyi/sp2024/math_imp/src/io.cpp -o CMakeFiles/math_interpreter.dir/src/io.cpp.s
+	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/massonsky/sp2024/mathinterpreter/src/io.cpp -o CMakeFiles/math_interpreter.dir/src/io.cpp.s
 
-CMakeFiles/math_interpreter.dir/src/handler.cpp.o: CMakeFiles/math_interpreter.dir/flags.make
-CMakeFiles/math_interpreter.dir/src/handler.cpp.o: /home/massonskyi/sp2024/math_imp/src/handler.cpp
-CMakeFiles/math_interpreter.dir/src/handler.cpp.o: CMakeFiles/math_interpreter.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/massonskyi/sp2024/math_imp/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/math_interpreter.dir/src/handler.cpp.o"
-	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/math_interpreter.dir/src/handler.cpp.o -MF CMakeFiles/math_interpreter.dir/src/handler.cpp.o.d -o CMakeFiles/math_interpreter.dir/src/handler.cpp.o -c /home/massonskyi/sp2024/math_imp/src/handler.cpp
+CMakeFiles/math_interpreter.dir/src/handlers/output_handler.cpp.o: CMakeFiles/math_interpreter.dir/flags.make
+CMakeFiles/math_interpreter.dir/src/handlers/output_handler.cpp.o: /home/massonsky/sp2024/mathinterpreter/src/handlers/output_handler.cpp
+CMakeFiles/math_interpreter.dir/src/handlers/output_handler.cpp.o: CMakeFiles/math_interpreter.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/massonsky/sp2024/mathinterpreter/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/math_interpreter.dir/src/handlers/output_handler.cpp.o"
+	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/math_interpreter.dir/src/handlers/output_handler.cpp.o -MF CMakeFiles/math_interpreter.dir/src/handlers/output_handler.cpp.o.d -o CMakeFiles/math_interpreter.dir/src/handlers/output_handler.cpp.o -c /home/massonsky/sp2024/mathinterpreter/src/handlers/output_handler.cpp
 
-CMakeFiles/math_interpreter.dir/src/handler.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/math_interpreter.dir/src/handler.cpp.i"
-	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/massonskyi/sp2024/math_imp/src/handler.cpp > CMakeFiles/math_interpreter.dir/src/handler.cpp.i
+CMakeFiles/math_interpreter.dir/src/handlers/output_handler.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/math_interpreter.dir/src/handlers/output_handler.cpp.i"
+	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/massonsky/sp2024/mathinterpreter/src/handlers/output_handler.cpp > CMakeFiles/math_interpreter.dir/src/handlers/output_handler.cpp.i
 
-CMakeFiles/math_interpreter.dir/src/handler.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/math_interpreter.dir/src/handler.cpp.s"
-	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/massonskyi/sp2024/math_imp/src/handler.cpp -o CMakeFiles/math_interpreter.dir/src/handler.cpp.s
+CMakeFiles/math_interpreter.dir/src/handlers/output_handler.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/math_interpreter.dir/src/handlers/output_handler.cpp.s"
+	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/massonsky/sp2024/mathinterpreter/src/handlers/output_handler.cpp -o CMakeFiles/math_interpreter.dir/src/handlers/output_handler.cpp.s
+
+CMakeFiles/math_interpreter.dir/src/handlers/error_handler.cpp.o: CMakeFiles/math_interpreter.dir/flags.make
+CMakeFiles/math_interpreter.dir/src/handlers/error_handler.cpp.o: /home/massonsky/sp2024/mathinterpreter/src/handlers/error_handler.cpp
+CMakeFiles/math_interpreter.dir/src/handlers/error_handler.cpp.o: CMakeFiles/math_interpreter.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/massonsky/sp2024/mathinterpreter/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/math_interpreter.dir/src/handlers/error_handler.cpp.o"
+	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/math_interpreter.dir/src/handlers/error_handler.cpp.o -MF CMakeFiles/math_interpreter.dir/src/handlers/error_handler.cpp.o.d -o CMakeFiles/math_interpreter.dir/src/handlers/error_handler.cpp.o -c /home/massonsky/sp2024/mathinterpreter/src/handlers/error_handler.cpp
+
+CMakeFiles/math_interpreter.dir/src/handlers/error_handler.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/math_interpreter.dir/src/handlers/error_handler.cpp.i"
+	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/massonsky/sp2024/mathinterpreter/src/handlers/error_handler.cpp > CMakeFiles/math_interpreter.dir/src/handlers/error_handler.cpp.i
+
+CMakeFiles/math_interpreter.dir/src/handlers/error_handler.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/math_interpreter.dir/src/handlers/error_handler.cpp.s"
+	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/massonsky/sp2024/mathinterpreter/src/handlers/error_handler.cpp -o CMakeFiles/math_interpreter.dir/src/handlers/error_handler.cpp.s
 
 CMakeFiles/math_interpreter.dir/main.cpp.o: CMakeFiles/math_interpreter.dir/flags.make
-CMakeFiles/math_interpreter.dir/main.cpp.o: /home/massonskyi/sp2024/math_imp/main.cpp
+CMakeFiles/math_interpreter.dir/main.cpp.o: /home/massonsky/sp2024/mathinterpreter/main.cpp
 CMakeFiles/math_interpreter.dir/main.cpp.o: CMakeFiles/math_interpreter.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/massonskyi/sp2024/math_imp/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/math_interpreter.dir/main.cpp.o"
-	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/math_interpreter.dir/main.cpp.o -MF CMakeFiles/math_interpreter.dir/main.cpp.o.d -o CMakeFiles/math_interpreter.dir/main.cpp.o -c /home/massonskyi/sp2024/math_imp/main.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/massonsky/sp2024/mathinterpreter/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/math_interpreter.dir/main.cpp.o"
+	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/math_interpreter.dir/main.cpp.o -MF CMakeFiles/math_interpreter.dir/main.cpp.o.d -o CMakeFiles/math_interpreter.dir/main.cpp.o -c /home/massonsky/sp2024/mathinterpreter/main.cpp
 
 CMakeFiles/math_interpreter.dir/main.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/math_interpreter.dir/main.cpp.i"
-	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/massonskyi/sp2024/math_imp/main.cpp > CMakeFiles/math_interpreter.dir/main.cpp.i
+	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/massonsky/sp2024/mathinterpreter/main.cpp > CMakeFiles/math_interpreter.dir/main.cpp.i
 
 CMakeFiles/math_interpreter.dir/main.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/math_interpreter.dir/main.cpp.s"
-	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/massonskyi/sp2024/math_imp/main.cpp -o CMakeFiles/math_interpreter.dir/main.cpp.s
+	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/massonsky/sp2024/mathinterpreter/main.cpp -o CMakeFiles/math_interpreter.dir/main.cpp.s
 
 # Object files for target math_interpreter
 math_interpreter_OBJECTS = \
-"CMakeFiles/math_interpreter.dir/src/mod/objects.cpp.o" \
+"CMakeFiles/math_interpreter.dir/src/mod/objects.c.o" \
 "CMakeFiles/math_interpreter.dir/src/core.cpp.o" \
 "CMakeFiles/math_interpreter.dir/src/io.cpp.o" \
-"CMakeFiles/math_interpreter.dir/src/handler.cpp.o" \
+"CMakeFiles/math_interpreter.dir/src/handlers/output_handler.cpp.o" \
+"CMakeFiles/math_interpreter.dir/src/handlers/error_handler.cpp.o" \
 "CMakeFiles/math_interpreter.dir/main.cpp.o"
 
 # External object files for target math_interpreter
 math_interpreter_EXTERNAL_OBJECTS =
 
-math_interpreter: CMakeFiles/math_interpreter.dir/src/mod/objects.cpp.o
+math_interpreter: CMakeFiles/math_interpreter.dir/src/mod/objects.c.o
 math_interpreter: CMakeFiles/math_interpreter.dir/src/core.cpp.o
 math_interpreter: CMakeFiles/math_interpreter.dir/src/io.cpp.o
-math_interpreter: CMakeFiles/math_interpreter.dir/src/handler.cpp.o
+math_interpreter: CMakeFiles/math_interpreter.dir/src/handlers/output_handler.cpp.o
+math_interpreter: CMakeFiles/math_interpreter.dir/src/handlers/error_handler.cpp.o
 math_interpreter: CMakeFiles/math_interpreter.dir/main.cpp.o
 math_interpreter: CMakeFiles/math_interpreter.dir/build.make
 math_interpreter: CMakeFiles/math_interpreter.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/massonskyi/sp2024/math_imp/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Linking CXX executable math_interpreter"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/massonsky/sp2024/mathinterpreter/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Linking CXX executable math_interpreter"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/math_interpreter.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
@@ -169,6 +185,6 @@ CMakeFiles/math_interpreter.dir/clean:
 .PHONY : CMakeFiles/math_interpreter.dir/clean
 
 CMakeFiles/math_interpreter.dir/depend:
-	cd /home/massonskyi/sp2024/math_imp/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/massonskyi/sp2024/math_imp /home/massonskyi/sp2024/math_imp /home/massonskyi/sp2024/math_imp/build /home/massonskyi/sp2024/math_imp/build /home/massonskyi/sp2024/math_imp/build/CMakeFiles/math_interpreter.dir/DependInfo.cmake "--color=$(COLOR)"
+	cd /home/massonsky/sp2024/mathinterpreter/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/massonsky/sp2024/mathinterpreter /home/massonsky/sp2024/mathinterpreter /home/massonsky/sp2024/mathinterpreter/build /home/massonsky/sp2024/mathinterpreter/build /home/massonsky/sp2024/mathinterpreter/build/CMakeFiles/math_interpreter.dir/DependInfo.cmake "--color=$(COLOR)"
 .PHONY : CMakeFiles/math_interpreter.dir/depend
 

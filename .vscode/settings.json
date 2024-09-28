@@ -1,7 +1,7 @@
 {
     "workbench.colorCustomizations": {
         "editorGhostText.foreground": "#FAE72D",
-        "activityBar.background": "#5D0F10",
+        "activityBar.background": "#4e5e5f",
         "titleBar.activeBackground": "#821517",
         "titleBar.activeForeground": "#FEFBFB"
     },
@@ -86,9 +86,21 @@
         "typeindex": "cpp",
         "__functional_base": "cpp",
         "__node_handle": "cpp",
-        "__memory": "cpp"
+        "__memory": "cpp",
+        "expected": "cpp",
+        "__functional_base_03": "cpp",
+        "__hash_table": "cpp",
+        "__tree": "cpp",
+        "__tuple": "cpp",
+        "any": "cpp",
+        "__config": "cpp",
+        "ios": "cpp",
+        "__split_buffer": "cpp",
+        "queue": "cpp",
+        "stack": "cpp"
     },
     "cSpell.words": [
         "FUNCTOOLS"
     ],
+    "C_Cpp.default.compilerPath": "/usr/bin/gcc-13",
 }

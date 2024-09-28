@@ -57,13 +57,23 @@ RM = /usr/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/massonskyi/sp2024/math_imp
+CMAKE_SOURCE_DIR = /home/massonsky/sp2024/mathinterpreter
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/massonskyi/sp2024/math_imp/build
+CMAKE_BINARY_DIR = /home/massonsky/sp2024/mathinterpreter/build
 
 #=============================================================================
 # Targets provided globally by CMake.
+
+# Special rule for the target test
+test:
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --cyan "Running tests..."
+	/usr/bin/ctest --force-new-ctest-process $(ARGS)
+.PHONY : test
+
+# Special rule for the target test
+test/fast: test
+.PHONY : test/fast
 
 # Special rule for the target edit_cache
 edit_cache:
@@ -87,9 +97,9 @@ rebuild_cache/fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/massonskyi/sp2024/math_imp/build/CMakeFiles /home/massonskyi/sp2024/math_imp/build//CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/massonsky/sp2024/mathinterpreter/build/CMakeFiles /home/massonsky/sp2024/mathinterpreter/build//CMakeFiles/progress.marks
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/massonskyi/sp2024/math_imp/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/massonsky/sp2024/mathinterpreter/build/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -129,6 +139,58 @@ math_interpreter/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/math_interpreter.dir/build.make CMakeFiles/math_interpreter.dir/build
 .PHONY : math_interpreter/fast
 
+#=============================================================================
+# Target rules for targets named test_vector
+
+# Build rule for target.
+test_vector: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 test_vector
+.PHONY : test_vector
+
+# fast build rule for target.
+test_vector/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_vector.dir/build.make CMakeFiles/test_vector.dir/build
+.PHONY : test_vector/fast
+
+#=============================================================================
+# Target rules for targets named test_matrix
+
+# Build rule for target.
+test_matrix: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 test_matrix
+.PHONY : test_matrix
+
+# fast build rule for target.
+test_matrix/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_matrix.dir/build.make CMakeFiles/test_matrix.dir/build
+.PHONY : test_matrix/fast
+
+#=============================================================================
+# Target rules for targets named test_rational
+
+# Build rule for target.
+test_rational: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 test_rational
+.PHONY : test_rational
+
+# fast build rule for target.
+test_rational/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_rational.dir/build.make CMakeFiles/test_rational.dir/build
+.PHONY : test_rational/fast
+
+#=============================================================================
+# Target rules for targets named test_interpreter
+
+# Build rule for target.
+test_interpreter: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 test_interpreter
+.PHONY : test_interpreter
+
+# fast build rule for target.
+test_interpreter/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_interpreter.dir/build.make CMakeFiles/test_interpreter.dir/build
+.PHONY : test_interpreter/fast
+
 main.o: main.cpp.o
 .PHONY : main.o
 
@@ -159,6 +221,7 @@ src/core.o: src/core.cpp.o
 # target to build an object file
 src/core.cpp.o:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/math_interpreter.dir/build.make CMakeFiles/math_interpreter.dir/src/core.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_interpreter.dir/build.make CMakeFiles/test_interpreter.dir/src/core.cpp.o
 .PHONY : src/core.cpp.o
 
 src/core.i: src/core.cpp.i
@@ -167,6 +230,7 @@ src/core.i: src/core.cpp.i
 # target to preprocess a source file
 src/core.cpp.i:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/math_interpreter.dir/build.make CMakeFiles/math_interpreter.dir/src/core.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_interpreter.dir/build.make CMakeFiles/test_interpreter.dir/src/core.cpp.i
 .PHONY : src/core.cpp.i
 
 src/core.s: src/core.cpp.s
@@ -175,31 +239,56 @@ src/core.s: src/core.cpp.s
 # target to generate assembly for a file
 src/core.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/math_interpreter.dir/build.make CMakeFiles/math_interpreter.dir/src/core.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_interpreter.dir/build.make CMakeFiles/test_interpreter.dir/src/core.cpp.s
 .PHONY : src/core.cpp.s
 
-src/handler.o: src/handler.cpp.o
-.PHONY : src/handler.o
+src/handlers/error_handler.o: src/handlers/error_handler.cpp.o
+.PHONY : src/handlers/error_handler.o
 
 # target to build an object file
-src/handler.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/math_interpreter.dir/build.make CMakeFiles/math_interpreter.dir/src/handler.cpp.o
-.PHONY : src/handler.cpp.o
+src/handlers/error_handler.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/math_interpreter.dir/build.make CMakeFiles/math_interpreter.dir/src/handlers/error_handler.cpp.o
+.PHONY : src/handlers/error_handler.cpp.o
 
-src/handler.i: src/handler.cpp.i
-.PHONY : src/handler.i
+src/handlers/error_handler.i: src/handlers/error_handler.cpp.i
+.PHONY : src/handlers/error_handler.i
 
 # target to preprocess a source file
-src/handler.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/math_interpreter.dir/build.make CMakeFiles/math_interpreter.dir/src/handler.cpp.i
-.PHONY : src/handler.cpp.i
+src/handlers/error_handler.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/math_interpreter.dir/build.make CMakeFiles/math_interpreter.dir/src/handlers/error_handler.cpp.i
+.PHONY : src/handlers/error_handler.cpp.i
 
-src/handler.s: src/handler.cpp.s
-.PHONY : src/handler.s
+src/handlers/error_handler.s: src/handlers/error_handler.cpp.s
+.PHONY : src/handlers/error_handler.s
 
 # target to generate assembly for a file
-src/handler.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/math_interpreter.dir/build.make CMakeFiles/math_interpreter.dir/src/handler.cpp.s
-.PHONY : src/handler.cpp.s
+src/handlers/error_handler.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/math_interpreter.dir/build.make CMakeFiles/math_interpreter.dir/src/handlers/error_handler.cpp.s
+.PHONY : src/handlers/error_handler.cpp.s
+
+src/handlers/output_handler.o: src/handlers/output_handler.cpp.o
+.PHONY : src/handlers/output_handler.o
+
+# target to build an object file
+src/handlers/output_handler.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/math_interpreter.dir/build.make CMakeFiles/math_interpreter.dir/src/handlers/output_handler.cpp.o
+.PHONY : src/handlers/output_handler.cpp.o
+
+src/handlers/output_handler.i: src/handlers/output_handler.cpp.i
+.PHONY : src/handlers/output_handler.i
+
+# target to preprocess a source file
+src/handlers/output_handler.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/math_interpreter.dir/build.make CMakeFiles/math_interpreter.dir/src/handlers/output_handler.cpp.i
+.PHONY : src/handlers/output_handler.cpp.i
+
+src/handlers/output_handler.s: src/handlers/output_handler.cpp.s
+.PHONY : src/handlers/output_handler.s
+
+# target to generate assembly for a file
+src/handlers/output_handler.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/math_interpreter.dir/build.make CMakeFiles/math_interpreter.dir/src/handlers/output_handler.cpp.s
+.PHONY : src/handlers/output_handler.cpp.s
 
 src/io.o: src/io.cpp.o
 .PHONY : src/io.o
@@ -225,29 +314,125 @@ src/io.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/math_interpreter.dir/build.make CMakeFiles/math_interpreter.dir/src/io.cpp.s
 .PHONY : src/io.cpp.s
 
-src/mod/objects.o: src/mod/objects.cpp.o
+src/mod/objects.o: src/mod/objects.c.o
 .PHONY : src/mod/objects.o
 
 # target to build an object file
-src/mod/objects.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/math_interpreter.dir/build.make CMakeFiles/math_interpreter.dir/src/mod/objects.cpp.o
-.PHONY : src/mod/objects.cpp.o
+src/mod/objects.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/math_interpreter.dir/build.make CMakeFiles/math_interpreter.dir/src/mod/objects.c.o
+.PHONY : src/mod/objects.c.o
 
-src/mod/objects.i: src/mod/objects.cpp.i
+src/mod/objects.i: src/mod/objects.c.i
 .PHONY : src/mod/objects.i
 
 # target to preprocess a source file
-src/mod/objects.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/math_interpreter.dir/build.make CMakeFiles/math_interpreter.dir/src/mod/objects.cpp.i
-.PHONY : src/mod/objects.cpp.i
+src/mod/objects.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/math_interpreter.dir/build.make CMakeFiles/math_interpreter.dir/src/mod/objects.c.i
+.PHONY : src/mod/objects.c.i
 
-src/mod/objects.s: src/mod/objects.cpp.s
+src/mod/objects.s: src/mod/objects.c.s
 .PHONY : src/mod/objects.s
 
 # target to generate assembly for a file
-src/mod/objects.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/math_interpreter.dir/build.make CMakeFiles/math_interpreter.dir/src/mod/objects.cpp.s
-.PHONY : src/mod/objects.cpp.s
+src/mod/objects.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/math_interpreter.dir/build.make CMakeFiles/math_interpreter.dir/src/mod/objects.c.s
+.PHONY : src/mod/objects.c.s
+
+tests/interpreter_test.o: tests/interpreter_test.cpp.o
+.PHONY : tests/interpreter_test.o
+
+# target to build an object file
+tests/interpreter_test.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_interpreter.dir/build.make CMakeFiles/test_interpreter.dir/tests/interpreter_test.cpp.o
+.PHONY : tests/interpreter_test.cpp.o
+
+tests/interpreter_test.i: tests/interpreter_test.cpp.i
+.PHONY : tests/interpreter_test.i
+
+# target to preprocess a source file
+tests/interpreter_test.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_interpreter.dir/build.make CMakeFiles/test_interpreter.dir/tests/interpreter_test.cpp.i
+.PHONY : tests/interpreter_test.cpp.i
+
+tests/interpreter_test.s: tests/interpreter_test.cpp.s
+.PHONY : tests/interpreter_test.s
+
+# target to generate assembly for a file
+tests/interpreter_test.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_interpreter.dir/build.make CMakeFiles/test_interpreter.dir/tests/interpreter_test.cpp.s
+.PHONY : tests/interpreter_test.cpp.s
+
+tests/matrix_test.o: tests/matrix_test.cpp.o
+.PHONY : tests/matrix_test.o
+
+# target to build an object file
+tests/matrix_test.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_matrix.dir/build.make CMakeFiles/test_matrix.dir/tests/matrix_test.cpp.o
+.PHONY : tests/matrix_test.cpp.o
+
+tests/matrix_test.i: tests/matrix_test.cpp.i
+.PHONY : tests/matrix_test.i
+
+# target to preprocess a source file
+tests/matrix_test.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_matrix.dir/build.make CMakeFiles/test_matrix.dir/tests/matrix_test.cpp.i
+.PHONY : tests/matrix_test.cpp.i
+
+tests/matrix_test.s: tests/matrix_test.cpp.s
+.PHONY : tests/matrix_test.s
+
+# target to generate assembly for a file
+tests/matrix_test.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_matrix.dir/build.make CMakeFiles/test_matrix.dir/tests/matrix_test.cpp.s
+.PHONY : tests/matrix_test.cpp.s
+
+tests/rational_test.o: tests/rational_test.cpp.o
+.PHONY : tests/rational_test.o
+
+# target to build an object file
+tests/rational_test.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_rational.dir/build.make CMakeFiles/test_rational.dir/tests/rational_test.cpp.o
+.PHONY : tests/rational_test.cpp.o
+
+tests/rational_test.i: tests/rational_test.cpp.i
+.PHONY : tests/rational_test.i
+
+# target to preprocess a source file
+tests/rational_test.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_rational.dir/build.make CMakeFiles/test_rational.dir/tests/rational_test.cpp.i
+.PHONY : tests/rational_test.cpp.i
+
+tests/rational_test.s: tests/rational_test.cpp.s
+.PHONY : tests/rational_test.s
+
+# target to generate assembly for a file
+tests/rational_test.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_rational.dir/build.make CMakeFiles/test_rational.dir/tests/rational_test.cpp.s
+.PHONY : tests/rational_test.cpp.s
+
+tests/vector_test.o: tests/vector_test.cpp.o
+.PHONY : tests/vector_test.o
+
+# target to build an object file
+tests/vector_test.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_vector.dir/build.make CMakeFiles/test_vector.dir/tests/vector_test.cpp.o
+.PHONY : tests/vector_test.cpp.o
+
+tests/vector_test.i: tests/vector_test.cpp.i
+.PHONY : tests/vector_test.i
+
+# target to preprocess a source file
+tests/vector_test.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_vector.dir/build.make CMakeFiles/test_vector.dir/tests/vector_test.cpp.i
+.PHONY : tests/vector_test.cpp.i
+
+tests/vector_test.s: tests/vector_test.cpp.s
+.PHONY : tests/vector_test.s
+
+# target to generate assembly for a file
+tests/vector_test.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_vector.dir/build.make CMakeFiles/test_vector.dir/tests/vector_test.cpp.s
+.PHONY : tests/vector_test.cpp.s
 
 # Help Target
 help:
@@ -257,22 +442,42 @@ help:
 	@echo "... depend"
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
+	@echo "... test"
 	@echo "... math_interpreter"
+	@echo "... test_interpreter"
+	@echo "... test_matrix"
+	@echo "... test_rational"
+	@echo "... test_vector"
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"
 	@echo "... src/core.o"
 	@echo "... src/core.i"
 	@echo "... src/core.s"
-	@echo "... src/handler.o"
-	@echo "... src/handler.i"
-	@echo "... src/handler.s"
+	@echo "... src/handlers/error_handler.o"
+	@echo "... src/handlers/error_handler.i"
+	@echo "... src/handlers/error_handler.s"
+	@echo "... src/handlers/output_handler.o"
+	@echo "... src/handlers/output_handler.i"
+	@echo "... src/handlers/output_handler.s"
 	@echo "... src/io.o"
 	@echo "... src/io.i"
 	@echo "... src/io.s"
 	@echo "... src/mod/objects.o"
 	@echo "... src/mod/objects.i"
 	@echo "... src/mod/objects.s"
+	@echo "... tests/interpreter_test.o"
+	@echo "... tests/interpreter_test.i"
+	@echo "... tests/interpreter_test.s"
+	@echo "... tests/matrix_test.o"
+	@echo "... tests/matrix_test.i"
+	@echo "... tests/matrix_test.s"
+	@echo "... tests/rational_test.o"
+	@echo "... tests/rational_test.i"
+	@echo "... tests/rational_test.s"
+	@echo "... tests/vector_test.o"
+	@echo "... tests/vector_test.i"
+	@echo "... tests/vector_test.s"
 .PHONY : help
 
 

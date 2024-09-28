@@ -26,24 +26,24 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE.
  */
+#pragma once
 
-#ifndef _HANDLER_H_
-#define _HANDLER_H_
+#ifndef OUTPUT_HANDLER_H_
+#define OUTPUT_HANDLER_H_
 
-#include <cstddef>
 #include <optional>
 #include <array>
 /**
- * @class ColorPrettyPrinter
+ * @class OutputHandler
  * @brief A class for printing text with ANSI color codes.
  * 
  * This class provides functionality to print text with various ANSI color codes.
  * It supports enabling/disabling color output, setting custom colors, and global formatting.
  */
-class ColorPrettyPrinter {
+class OutputHandler final{
 public:
     /**    
-     * @enum Colord    
+     * @enum Color
      * @brief Enumeration of ANSI color codes.
      * 
      * This enum defines various ANSI color codes that can be used for text formatting.
@@ -59,11 +59,12 @@ public:
         White = 37   ///< White color.
     };
     /**
-     * @brief Constructor for ColorPrettyPrinter.
+     * @brief Constructor for OutputHandler.
      * 
      * @param enable_color A boolean to enable or disable color output. Default is true.
+     * @param global_format The format string to use globally.
      */
-    ColorPrettyPrinter(bool enable_color = true);
+    explicit OutputHandler(bool enable_color = true, std::optional<const char*> global_format = std::nullopt);
 
     /**
      * @brief Set whether color output is enabled.
@@ -76,9 +77,9 @@ public:
      * @brief Set a custom color with a specific ANSI code.
      * 
      * @param color The color to set.
-     * @param ansiCode The ANSI code for the custom color.
+     * @param code The ANSI code for the custom color.
      */
-    void set_custom_color(Color color, int ansiCode);
+    void set_custom_color(Color color, const char* code);
 
     /**
      * @brief Set a global format for all printed text.
@@ -160,93 +161,10 @@ public:
      */
     template<typename... Args>
     void formatted(Color color, const char* formatString, Args&&... args) const;
+    
 private:
     bool color_enabled; ///< Boolean indicating if color output is enabled.    
     std::optional<const char*> global_format; ///< Optional global format string.
-    std::array<std::optional<int>, 8> custom_color; ///< Array of optional custom ANSI codes for colors.
+    std::array<std::optional<const char*>, 256> custom_color; ///< Array of optional custom ANSI codes for colors.
 };
-
-/**
- * @class ErrorHandler
- * @brief A class to handle and report errors in input strings.
- * 
- * The ErrorHandler class provides methods to handle errors, check for syntax errors,
- * and indicate the position of errors in input strings.
- */
-class ErrorHandler {
-public:
-    /**
-     * @brief Default constructor for ErrorHandler.
-     */
-    ErrorHandler(bool enable_color=true);
-    
-    /**
-     * @brief Virtual destructor for ErrorHandler.
-     */
-    virtual ~ErrorHandler() = default;
-
-    /**
-     * @brief Handles the error based on the input and type.
-     * 
-     * @param input The input string where the error occurred.
-     * @param type The type of error to handle.
-     */
-    void handle(const char* input, const char* type);
-    /**
-     * @brief Provides a recommendation based on the error type.
-     * 
-     * @param type The type of error.
-     * @return A recommendation string for the given error type.
-     */
-    const char* get_recommendation(const char* type);
-
-    /** 
-     * @brief Checks for syntax errors in the input string.(deprecated)
-     * 
-     * @param input The input string to check.
-     * @return True if a syntax error is found, false otherwise.
-     */
-    // [[deprecated("Use all_syntax_error instead")]]
-    bool check_syntax_error(const char* input);
-
-    /** 
-     * @brief Checks for syntax errors in the input string.
-     * 
-     * @param input The input string to check.
-     * @return True if a syntax error is found, false otherwise.
-     */
-    bool check_all_syntax_error(const char* input);
-
-    /** 
-     * @brief Shows the position of the error in the input string.
-     * 
-     * @param input The input string where the error occurred.
-     */
-    void show_error_position(const char* input);
-    
-    /**
-     * @brief Indicates the position of the error in the input string.
-     * 
-     * @param input The input string where the error occurred.
-     */
-    [[deprecated("Use indicate_error_position v2 instead, this method will be removed in the future")]]
-    void indicate_error_position(const char* input);
-    /**
-     * @brief Indicates the position of the error in the input string.
-     * 
-     * @param input The input string where the error occurred.
-     */
-    void indicate_error_position_v2(const char* input);
-    
-    /** 
-     * @brief Prints a pointer to the error position in the input string.
-     * 
-     * @param input The input string where the error occurred.
-     * @param position The position of the error in the input string.
-     */
-    void print_error_pointer(const char* input, size_t position);
-
-private:
-    ColorPrettyPrinter printer; ///< The printer object for error handling.
-};
-#endif // _HANDLER_H_
+#endif // OUTPUT_HANDLER_H_

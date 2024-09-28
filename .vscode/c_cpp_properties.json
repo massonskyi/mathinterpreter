@@ -5,11 +5,14 @@
             "includePath": [
                 "${workspaceFolder}/**",
                 "${workspaceFolder}/include",
+                "${workspaceFolder}/include/mod",
+                "${workspaceFolder}/include/types",
+                "${workspaceFolder}/include/handlers",
                 "/usr/include",
                 "/usr/local/include"
             ],
             "defines": [],
-            "compilerPath": "/usr/bin/g++",
+            "compilerPath": null,
             "cStandard": "c23",
             "cppStandard": "gnu++23",
             "intelliSenseMode": "linux-gcc-x64"

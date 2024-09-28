@@ -29,7 +29,13 @@
 
 #ifndef VECTOR_H
 #define VECTOR_H
-#include "iobject.h"
+
+#include <iostream>
+#include <vector>
+#include <stdexcept>
+#include <numeric> // Для std::accumulate
+#include <iterator> // Add this line to include the <iterator> header
+
 /**
  * @class Vector
  * @brief A template class that represents a mathematical vector.
@@ -39,9 +45,8 @@
  * This class provides various operators for vector arithmetic and comparison.
  */
 template<typename T>
-class Vector final : public IObject {
+class Vector final {
 public:
-
     /**
      * @brief Default constructor.
      */
@@ -52,266 +57,287 @@ public:
      *
      * @param size The size of the vector.
      */
-    explicit Vector(size_t size);
+    explicit Vector(size_t size) : data(size) {}
 
     /**
      * @brief Move constructor.
      *
      * @param other The vector to move from.
      */
-    Vector(Vector&& other) noexcept;
-
+    Vector(Vector&& other) noexcept : data(std::move(other.data)) {}
+    /**
+     * @brief Copy constructor 
+     * 
+     * @param other The vector to copy from.
+     */
+    Vector(const Vector& other) : data(other.data) {}
     /**
      * @brief Destructor.
      */
-    ~Vector() override;
+    ~Vector() = default;
 
     /**
      * @brief Prints the vector.
      */
-    void print() const override;
+    void print() const {
+        for (const auto& elem : data) {
+            std::cout << elem << ' ';
+        }
+        std::cout << std::endl;
+    }
 
     /**
-     * @brief Prefix increment operator.e;
+     * @brief Prefix increment operator.
      * @return Reference to the incremented vector.
      */
-    Vector& operator++()override requires Incrementable<T>;
-
+    Vector& operator++() requires std::is_arithmetic_v<T> {
+        for (auto& elem : data) {
+            ++elem;
+        }
+        return *this;
+    }
 
     /**
      * @brief Prefix decrement operator.
      * @return Reference to the decremented vector.
      */
-    Vector& operator--()override requires Incrementable<T> ;
-
-
+    Vector& operator--() requires std::is_arithmetic_v<T> {
+        for (auto& elem : data) {
+            --elem;
+        }
+        return *this;
+    }
 
     /**
      * @brief Modulus operator.
-     * @param other The other object to perform the operation with.
-     * @return Reference to the result vector.
+     * @param other The other vector to perform the operation with.
+     * @return A new vector representing the modulus.
      */
-    Vector& operator%(const IObject& other) const override;
-
-    /**
-     * @brief Bitwise AND operator.
-     * @param other The other object to perform the operation with.
-     * @return Reference to the result vector.
-     */
-    Vector& operator&(const IObject& other) const override;
-
-    /**
-     * @brief Bitwise OR operator.
-     *
-     * @param other The other object to perform the operation with.
-     * @return Reference to the result vector.
-     */
-    Vector& operator|(const IObject& other) const override;
-
-    /**
-     * @brief Bitwise XOR operator.
-     *
-     * @param other The other object to perform the operation with.
-     * @return Reference to the result vector.
-     */
-    Vector& operator^(const IObject& other) const override;
-
-    /**
-     * @brief Bitwise left shift operator.
-     *
-     * @param other The other object to perform the operation with.
-     * @return Reference to the result vector.
-     */
-    Vector& operator<<(const IObject& other) const override;
-
-    /**
-     * @brief Bitwise right shift operator.
-     *
-     * @param other The other object to perform the operation with.
-     * @return Reference to the result vector.
-     */
-    Vector& operator>>(const IObject& other) const override;
-
-    /**
-     * @brief Modulus assignment operator.
-     *
-     * @param other The other object to perform the operation with.
-     * @return Reference to the result vector.
-     */
-    Vector& operator%=(const IObject& other) override;
-
-    /**
-     * @brief Bitwise AND assignment operator.
-     *
-     * @param other The other object to perform the operation with.
-     * @return Reference to the result vector.
-     */
-    Vector& operator&=(const IObject& other) override;
-
-    /**
-     * @brief Bitwise OR assignment operator.
-     *
-     * @param other The other object to perform the operation with.
-     * @return Reference to the result vector.
-     */
-    Vector& operator|=(const IObject& other) override;
-
-    /**
-     * @brief Bitwise XOR assignment operator.
-     *
-     * @param other The other object to perform the operation with.
-     * @return Reference to the result vector.
-     */
-    Vector& operator^=(const IObject& other) override;
-
-    /**
-     * @brief Bitwise left shift assignment operator.
-     *
-     * @param other The other object to perform the operation with.
-     * @return Reference to the result vector.
-     */
-    Vector& operator<<=(const IObject& other) override;
-
-    /**
-     * @brief Bitwise right shift assignment operator.
-     *
-     * @param other The other object to perform the operation with.
-     * @return Reference to the result vector.
-     */
-    Vector& operator>>=(const IObject& other) override;
+    Vector operator%(const Vector& other) const {
+        if (data.size() != other.data.size()) {
+            throw std::invalid_argument("Vectors must have the same size.");
+        }
+        Vector result(data.size());
+        for (size_t i = 0; i < data.size(); ++i) {
+            result.data[i] = data[i] % other.data[i];
+        }
+        return result;
+    }
 
     /**
      * @brief Equality operator.
      *
-     * @param other The other object to compare with.
+     * @param other The other vector to compare with.
      * @return True if the vectors are equal, false otherwise.
      */
-    bool operator==(const IObject& other) const override;
+    bool operator==(const Vector& other) const {
+        return data == other.data;
+    }
 
     /**
      * @brief Inequality operator.
      *
-     * @param other The other object to compare with.
+     * @param other The other vector to compare with.
      * @return True if the vectors are not equal, false otherwise.
      */
-    bool operator!=(const IObject& other) const override;
+    bool operator!=(const Vector& other) const {
+        return !(*this == other);
+    }
 
     /**
      * @brief Less than operator.
      *
-     * @param other The other object to compare with.
+     * @param other The other vector to compare with.
      * @return True if this vector is less than the other, false otherwise.
      */
-    bool operator<(const IObject& other) const override;
+    bool operator<(const Vector& other) const {
+        return std::lexicographical_compare(data.begin(), data.end(), other.data.begin(), other.data.end());
+    }
 
     /**
      * @brief Less than or equal to operator.
      *
-     * @param other The other object to compare with.
+     * @param other The other vector to compare with.
      * @return True if this vector is less than or equal to the other, false otherwise.
      */
-    bool operator<=(const IObject& other) const override;
+    bool operator<=(const Vector& other) const {
+        return *this < other || *this == other;
+    }
 
     /**
      * @brief Greater than operator.
      *
-     * @param other The other object to compare with.
+     * @param other The other vector to compare with.
      * @return True if this vector is greater than the other, false otherwise.
      */
-    bool operator>(const IObject& other) const override;
+    bool operator>(const Vector& other) const {
+        return !(*this <= other);
+    }
 
     /**
      * @brief Greater than or equal to operator.
      *
-     * @param other The other object to compare with.
+     * @param other The other vector to compare with.
      * @return True if this vector is greater than or equal to the other, false otherwise.
      */
-    bool operator>=(const IObject& other) const override;
+    bool operator>=(const Vector& other) const {
+        return !(*this < other);
+    }
 
     /**
      * @brief Addition operator.
      *
-     * @param other The other object to add.
-     * @return Reference to the result vector.
+     * @param other The other vector to add.
+     * @return A new vector representing the sum.
      */
-    Vector& operator+(const IObject& other) const override;
+    Vector operator+(const Vector& other) const {
+        if (data.size() != other.data.size()) {
+            throw std::invalid_argument("Vectors must have the same size.");
+        }
+        Vector result(data.size());
+        for (size_t i = 0; i < data.size(); ++i) {
+            result.data[i] = data[i] + other.data[i];
+        }
+        return result;
+    }
 
     /**
      * @brief Subtraction operator.
      *
-     * @param other The other object to subtract.
-     * @return Reference to the result vector.
+     * @param other The other vector to subtract.
+     * @return A new vector representing the difference.
      */
-    Vector& operator-(const IObject& other) const override;
+    Vector operator-(const Vector& other) const {
+        if (data.size() != other.data.size()) {
+            throw std::invalid_argument("Vectors must have the same size.");
+        }
+        Vector result(data.size());
+        for (size_t i = 0; i < data.size(); ++i) {
+            result.data[i] = data[i] - other.data[i];
+        }
+        return result;
+    }
 
     /**
      * @brief Multiplication operator.
      *
-     * @param other The other object to multiply.
-     * @return Reference to the result vector.
+     * @param other The other vector to multiply.
+     * @return A new vector representing the product.
      */
-    Vector& operator*(const IObject& other) const override;
+    Vector operator*(const Vector& other) const {
+        if (data.size() != other.data.size()) {
+            throw std::invalid_argument("Vectors must have the same size.");
+        }
+        Vector result(data.size());
+        for (size_t i = 0; i < data.size(); ++i) {
+            result.data[i] = data[i] * other.data[i];
+        }
+        return result;
+    }
 
     /**
      * @brief Division operator.
      *
-     * @param other The other object to divide.
-     * @return Reference to the result vector.
+     * @param other The other vector to divide.
+     * @return A new vector representing the quotient.
      */
-    Vector& operator/(const IObject& other) const override;
+    Vector operator/(const Vector& other) const {
+        if (data.size() != other.data.size()) {
+            throw std::invalid_argument("Vectors must have the same size.");
+        }
+        Vector result(data.size());
+        for (size_t i = 0; i < data.size(); ++i) {
+            if (other.data[i] == 0) {
+                throw std::invalid_argument("Cannot divide by zero.");
+            }
+            result.data[i] = data[i] / other.data[i];
+        }
+        return result;
+    }
 
     /**
      * @brief Addition assignment operator.
      *
-     * @param other The other object to add.
-     * @return Reference to the result vector.
+     * @param other The other vector to add.
+     * @return Reference to the current vector after addition.
      */
-    Vector& operator+=(const IObject& other) override;
+    Vector& operator+=(const Vector& other) {
+        *this = *this + other;
+        return *this;
+    }
 
     /**
      * @brief Subtraction assignment operator.
      *
-     * @param other The other object to subtract.
-     * @return Reference to the result vector.
+     * @param other The other vector to subtract.
+     * @return Reference to the current vector after subtraction.
      */
-    Vector& operator-=(const IObject& other) override;
+    Vector& operator-=(const Vector& other) {
+        *this = *this - other;
+        return *this;
+    }
 
     /**
      * @brief Multiplication assignment operator.
      *
-     * @param other The other object to multiply.
-     * @return Reference to the result vector.
+     * @param other The other vector to multiply.
+     * @return Reference to the current vector after multiplication.
      */
-    Vector& operator*=(const IObject& other) override;
+    Vector& operator*=(const Vector& other) {
+        *this = *this * other;
+        return *this;
+    }
 
     /**
      * @brief Division assignment operator.
      *
-     * @param other The other object to divide.
-     * @return Reference to the result vector.
+     * @param other The other vector to divide.
+     * @return Reference to the current vector after division.
      */
-    Vector& operator/=(const IObject& other) override;
+    Vector& operator/=(const Vector& other) {
+        *this = *this / other;
+        return *this;
+    }
+    
+    /**
+     * @brief Get data
+     */
+    inline std::vector<T> getData() const {
+        return data;
+    }
 
     /**
-     * @brief Subscript operator.
+     * @brief Get the size of the vector.
+     * @return The size of the vector.
+     */
+    size_t size() const {
+        return data.size();
+    }
+
+    /**
+     * @brief Const subscript operator.
      *
      * @param index Index of the element to access.
      * @return Reference to the element at the specified index.
      */
-    Vector& operator[](size_t index);
-
-    /**
-     * @brief Subscript operator.
-     *
-     * @param index Index of the element to access.
-     * @return Reference to the element at the specified index.
-     */
-    friend std::ostream& operator<<(std::ostream& os, const Vector& vector) {
-        for (const auto& elem : vector.data) {
-            os << elem << ' ';
+    T& operator[](size_t index){
+        if (index >= data.size()) {
+            throw std::out_of_range("Index out of range.");
         }
-        return os;
-    };
+        return data[index];
+    }
+    
+    /**
+     * @brief Const subscript operator.
+     * 
+     * @param other The vector
+     */
+    Vector& operator=(const Vector& other) {
+        if (this != &other) {
+            data = other.data;
+        }
+        return *this;
+    }
 
     /**
      * @brief Stream extraction operator.
@@ -324,24 +350,21 @@ public:
             is >> elem;
         }
         return is;
-    };
+    }
     /**
-     * @brief Getter for the data member.
-     * @return Reference to the data vector.
+     * @brief Stream insertion operator.
+     * @param os Output stream.
+     * @param vec Vector to insert into the stream.
      */
-
-    const Vector& getData() const;
+    friend std::ostream& operator<<(std::ostream& os, const Vector<T>& vec) {
+        for (const auto& element : vec.data) {
+            os << element << ' ';
+        }
+        return os;
+    }
 
 private:
-    /**
-     * @brief A container for storing elements of type T.
-     *
-     * This vector is used to store a collection of elements of type T.
-     * It provides dynamic array functionality, allowing elements to be
-     * added, removed, and accessed efficiently.
-     *
-     * @tparam T The type of elements stored in the vector.
-     */
-    std::vector<T> data;
+    std::vector<T> data; ///< Container for storing elements of type T.
 };
-#endif //VECTOR_H
+
+#endif // VECTOR_H

@@ -1,4 +1,4 @@
-# Install script for directory: /home/massonskyi/sp2024/math_imp
+# Install script for directory: /home/massonsky/sp2024/mathinterpreter
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -50,5 +50,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "/home/massonskyi/sp2024/math_imp/build/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "/home/massonsky/sp2024/mathinterpreter/build/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")

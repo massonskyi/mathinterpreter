@@ -26,9 +26,10 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE.
  */
-
-#include "handler.h"
+#pragma once
+#include "handlers/error_handler.h"
+#include "handlers/output_handler.h"
 #include "mod/objects.h"
 #include "interpreter.h"
 #include "io.h"
-#include "types.hpp"
+#include "types/types.h"

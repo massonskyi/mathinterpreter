@@ -1,5 +1,5 @@
 /*
-* COPYRIGHT (c) 2024 Massonskyi
+ * COPYRIGHT (c) 2024 Massonskyi
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -29,20 +29,24 @@
 
 #ifndef RATIONAL_H
 #define RATIONAL_H
+
+#include <iostream>
+#include <stdexcept>
+#include <numeric> // For std::gcd
+
 /**
  * @class Rational
  * @brief A class representing rational numbers with a numerator and denominator.
  *
- * The Rational class provides various arithmetic and bitwise operations for rational numbers.
- * It inherits from the IObject interface and overrides its virtual methods.
+ * The Rational class provides various arithmetic and comparison operations for rational numbers.
  */
 template<typename T>
-class Rational final : public IObject {
+class Rational final {
 public:
     /**
      * @brief Default constructor that initializes the rational number to 0/1.
      */
-    Rational() = default;
+    Rational() : numerator(0), denominator(1) {}
 
     /**
      * @brief Parameterized constructor that initializes the rational number with given numerator and denominator.
@@ -50,311 +54,151 @@ public:
      * @param numerator The numerator of the rational number.
      * @param denominator The denominator of the rational number.
      */
-    Rational(T numerator, T denominator);
+    Rational(T numerator, T denominator) {
+        if (denominator == 0) {
+            throw std::invalid_argument("Denominator cannot be zero.");
+        }
+        this->numerator = numerator;
+        this->denominator = denominator;
+        _reduce();
+    }
 
     /**
      * @brief Copy constructor.
      *
      * @param other The Rational object to copy from.
      */
-    Rational(const Rational& other);
+    Rational(const Rational& other) : numerator(other.numerator), denominator(other.denominator) {}
 
     /**
      * @brief Move constructor.
      *
      * @param other The Rational object to move from.
      */
-    Rational(Rational&& other) noexcept ;
+    Rational(Rational&& other) noexcept : numerator(other.numerator), denominator(other.denominator) {
+        other.numerator = 0;
+        other.denominator = 1;
+    }
 
     /**
      * @brief Assignment operator.
      * @param other The Rational object to copy from.
      * @return Reference to the assigned Rational object.
      */
-    Rational<T> &operator=(const Rational &other);
+    Rational& operator=(const Rational& other) {
+        if (this != &other) {
+            numerator = other.numerator;
+            denominator = other.denominator;
+        }
+        return *this;
+    }
 
     /**
-     * @brief Destructor.
+     * @brief Move assignment operator.
+     * @param other The Rational object to move from.
+     * @return Reference to the assigned Rational object.
      */
-    ~Rational() override = default;
+    Rational& operator=(Rational&& other) noexcept {
+        if (this != &other) {
+            numerator = other.numerator;
+            denominator = other.denominator;
+            other.numerator = 0;
+            other.denominator = 1;
+        }
+        return *this;
+    }
 
     /**
-     * @brief Prints the rational number.
+     * @brief Get the numerator of the rational number.
+     * @return The numerator.
      */
-    void print() const override;
+    T getNumerator() const { return numerator; }
 
     /**
-     * @brief Pre-increment operator.
-     *
-     * @return Reference to the incremented Rational object.
+     * @brief Get the denominator of the rational number.
+     * @return The denominator.
      */
-    Rational& operator++() override;
+    T getDenominator() const { return denominator; }
 
+    // Arithmetic operators
+    Rational operator+(const Rational& other) const {
+        return Rational(numerator * other.denominator + other.numerator * denominator,
+                        denominator * other.denominator);
+    }
 
-    /**
-     * @brief Pre-decrement operator.
-     *
-     * @return Reference to the decremented Rational object.
-     */
-    Rational& operator--() override;
+    Rational operator-(const Rational& other) const {
+        return Rational(numerator * other.denominator - other.numerator * denominator,
+                        denominator * other.denominator);
+    }
 
-    /**
-     * @brief Modulus operator.
-     *
-     * @param other The IObject to perform the operation with.
-     * @return Reference to the result of the modulus operation.
-     */
-    Rational& operator%(const IObject& other) const override;
+    Rational operator*(const Rational& other) const {
+        return Rational(numerator * other.numerator, denominator * other.denominator);
+    }
 
-    /**
-     * @brief Bitwise AND operator.
-     *
-     * @param other The IObject to perform the operation with.
-     * @return Reference to the result of the bitwise AND operation.
-     */
-    Rational& operator&(const IObject& other) const override;
+    Rational operator/(const Rational& other) const {
+        if (other.numerator == 0) {
+            throw std::invalid_argument("Division by zero.");
+        }
+        return Rational(numerator * other.denominator, denominator * other.numerator);
+    }
 
-    /**
-     * @brief Bitwise OR operator.
-     *
-     * @param other The IObject to perform the operation with.
-     * @return Reference to the result of the bitwise OR operation.
-     */
-    Rational& operator|(const IObject& other) const override;
+    // Comparison operators
+    bool operator==(const Rational& other) const {
+        return (numerator == other.numerator) && (denominator == other.denominator);
+    }
 
-    /**
-     * @brief Bitwise XOR operator.
-     *
-     * @param other The IObject to perform the operation with.
-     * @return Reference to the result of the bitwise XOR operation.
-     */
-    Rational& operator^(const IObject& other) const override;
+    bool operator!=(const Rational& other) const {
+        return !(*this == other);
+    }
 
-    /**
-     * @brief Left shift operator.
-     *
-     * @param other The IObject to perform the operation with.
-     * @return Reference to the result of the left shift operation.
-     */
-    Rational& operator<<(const IObject& other) const override;
+    bool operator<(const Rational& other) const {
+        return (numerator * other.denominator < other.numerator * denominator);
+    }
 
-    /**
-     * @brief Right shift operator.
-     *
-     * @param other The IObject to perform the operation with.
-     * @return Reference to the result of the right shift operation.
-     */
-    Rational& operator>>(const IObject& other) const override;
+    bool operator>(const Rational& other) const {
+        return (numerator * other.denominator > other.numerator * denominator);
+    }
 
-    /**
-     * @brief Modulus assignment operator.
-     *
-     * @param other The IObject to perform the operation with.
-     * @return Reference to the result of the modulus assignment operation.
-     */
-    Rational& operator%=(const IObject& other) override;
+    bool operator<=(const Rational& other) const {
+        return !(*this > other);
+    }
 
-    /**
-     * @brief Bitwise AND assignment operator.
-     *
-     * @param other The IObject to perform the operation with.
-     * @return Reference to the result of the bitwise AND assignment operation.
-     */
-    Rational& operator&=(const IObject& other) override;
+    bool operator>=(const Rational& other) const {
+        return !(*this < other);
+    }
 
-    /**
-     * @brief Bitwise OR assignment operator.
-     *
-     * @param other The IObject to perform the operation with.
-     * @return Reference to the result of the bitwise OR assignment operation.
-     */
-    Rational& operator|=(const IObject& other) override;
-
-    /**
-     * @brief Bitwise XOR assignment operator.
-     *
-     * @param other The IObject to perform the operation with.
-     * @return Reference to the result of the bitwise XOR assignment operation.
-     */
-    Rational& operator^=(const IObject& other) override;
-
-    /**
-     * @brief Left shift assignment operator.
-     *
-     * @param other The IObject to perform the operation with.
-     * @return Reference to the result of the left shift assignment operation.
-     */
-    Rational& operator<<=(const IObject& other) override;
-
-    /**
-     * @brief Right shift assignment operator.
-     *
-     * @param other The IObject to perform the operation with.
-     * @return Reference to the result of the right shift assignment operation.
-     */
-    Rational& operator>>=(const IObject& other) override;
-
-    /**
-     * @brief Equality operator.
-     *
-     * @param other The IObject to compare with.
-     * @return True if the objects are equal, false otherwise.
-     */
-    bool operator==(const IObject& other) const override;
-
-    /**
-     * @brief Inequality operator.
-     *
-     * @param other The IObject to compare with.
-     * @return True if the objects are not equal, false otherwise.
-     */
-    bool operator!=(const IObject& other) const override;
-
-    /**
-     * @brief Less than operator.
-     *
-     * @param other The IObject to compare with.
-     * @return True if this object is less than the other, false otherwise.
-     */
-    bool operator<(const IObject& other) const override;
-
-    /**
-     * @brief Less than or equal to operator.
-     *
-     * @param other The IObject to compare with.
-     * @return True if this object is less than or equal to the other, false otherwise.
-     */
-    bool operator<=(const IObject& other) const override;
-
-    /**
-     * @brief Greater than operator.
-     *
-     * @param other The IObject to compare with.
-     * @return True if this object is greater than the other, false otherwise.
-     */
-    bool operator>(const IObject& other) const override;
-
-    /**
-     * @brief Greater than or equal to operator.
-     *
-     * @param other The IObject to compare with.
-     * @return True if this object is greater than or equal to the other, false otherwise.
-     */
-    bool operator>=(const IObject& other) const override;
-
-    /**
-     * @brief Addition operator.
-     *
-     * @param other The IObject to add.
-     * @return Reference to the result of the addition.
-     */
-
-    Rational &operator+(const IObject &other) const override;
-    /**
-     * @brief Subtraction operator.
-     *
-     * @param other The IObject to subtract.
-     * @return The result is a new Rational object.
-     */
-    Rational<T> &operator=(Rational &&other) noexcept;
-    /**
-     * @brief Subtraction operator.
-     *
-     * @param other The IObject to subtract.
-     * @return Reference to the result of the subtraction.
-     */
-    Rational& operator-(const IObject& other) const override;
-
-    /**
-     * @brief Multiplication operator.
-     *
-     * @param other The IObject to multiply.
-     * @return Reference to the result of the multiplication.
-     */
-    Rational& operator*(const IObject& other) const override;
-
-    /**
-     * @brief Division operator.
-     *
-     * @param other The IObject to divide.
-     * @return Reference to the result of the division.
-     */
-    Rational& operator/(const IObject& other) const override;
-
-    /**
-     * @brief Addition assignment operator.
-     *
-     * @param other The IObject to add.
-     * @return Reference to the result of the addition assignment.
-     */
-    Rational& operator+=(const IObject& other) override;
-
-    /**
-     * @brief Subtraction assignment operator.
-     *
-     * @param other The IObject to subtract.
-     * @return Reference to the result of the subtraction assignment.
-     */
-    Rational& operator-=(const IObject& other) override;
-
-    /**
-     * @brief Multiplication assignment operator.
-     *
-     * @param other The IObject to multiply.
-     * @return Reference to the result of the multiplication assignment.
-     */
-    Rational& operator*=(const IObject& other) override;
-
-    /**
-     * @brief Division assignment operator.
-     *
-     * @param other The IObject to divide.
-     * @return Reference to the result of the division assignment.
-     */
-    Rational& operator/=(const IObject& other) override;
-
-    /**
-     * @brief Stream insertion operator.
-     *
-     * @param os The output stream to write to.
-     * @param rational The Rational object to write.
-     */
-    friend std::ostream& operator<<(std::ostream& os, const Rational& rational) {
-        os << rational.numerator << '/' << rational.denominator;
+    // Stream operators
+    friend std::ostream& operator<<(std::ostream& os, const Rational& r) {
+        os << r.numerator << "/" << r.denominator;
         return os;
     }
-    friend std::istream& operator>>(std::istream& is, Rational& rational) {
-        char slash;
-        is >> rational.numerator >> slash >> rational.denominator;
-        return is;
 
-    }
-    /**
-     * @brief Stream extraction operator.
-     *
-     * @param is The input stream to read from.
-     * @param r The Rational object to read into.
-     */
     friend std::istream& operator>>(std::istream& is, Rational& r) {
-        is >> r.numerator >> r.denominator;
+        char slash; // To consume the '/' character
+        is >> r.numerator >> slash >> r.denominator;
+        if (r.denominator == 0) {
+            throw std::invalid_argument("Denominator cannot be zero.");
+        }
+        r._reduce(); // Simplify after input
         return is;
     }
 
 private:
-    /**
-     * @brief Represents the numerator part of a fraction.
-     *
-     * @tparam T The type of the numerator, typically an integer or floating-point type.
-     */
-    T numerator;
-    T denominator;
+    T numerator; // Numerator of the rational number
+    T denominator; // Denominator of the rational number
 
     /**
      * @brief Reduces the rational number to its simplest form.
      */
-    void _reduce();
+    void _reduce() {
+        if (denominator < 0) {
+            numerator = -numerator;
+            denominator = -denominator;
+        }
+        T gcd = std::gcd(numerator, denominator);
+        numerator /= gcd;
+        denominator /= gcd;
+    }
 };
-/**
- * @brief Definition of the Vector class template.
- */
-#endif //RATIONAL_H
+
+#endif // RATIONAL_H
