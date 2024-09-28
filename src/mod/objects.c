@@ -29,7 +29,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#include "../../include/mod/objects.h"
+#include "../include/mod/objects.h"
 
 /**
  * @brief Initializes a Signal object.
@@ -88,7 +88,7 @@ void expand_slots(Signal *signal) {
  * @param func Function pointer for the slot function.
  * @param args Arguments for the slot function.
  */
-void connect_slot(Signal *signal, func_t func, void *args) {
+void connect_slot(Signal *signal, const func_t func, void *args) {
     pthread_mutex_lock(&signal->mutex); // Захватываем мьютекс
 
     expand_slots(signal);
@@ -109,7 +109,7 @@ void connect_slot(Signal *signal, func_t func, void *args) {
  * @param signal Pointer to the Signal object from which the slot should be disconnected.
  * @param func Function pointer to the slot function that should be disconnected.
  */
-void disconnect_slot(Signal *signal, func_t func) {
+void disconnect_slot(Signal *signal, const func_t func) {
     pthread_mutex_lock(&signal->mutex); // Захватываем мьютекс
 
     for (int i = 0; i < signal->count; i++) {
@@ -153,7 +153,7 @@ void disconnect_all_slots(Signal *signal) {
 void emit_signal(Signal *signal, void *data) {
     pthread_mutex_lock(&signal->mutex); // Захватываем мьютекс
     for (int i = 0; i < signal->count; i++) {
-        Slot *slot = &signal->slots[i];
+        const Slot *slot = &signal->slots[i];
         slot->func(data, slot->args);
     }
     pthread_mutex_unlock(&signal->mutex); // Освобождаем мьютекс

@@ -36,15 +36,20 @@ include_directories(${CMAKE_SOURCE_DIR}/include)
 
 # Файлы с исходным кодом
 set(SOURCES
-    src/mod/objects.cpp
-    src/core.cpp
-    src/io.cpp
-    src/handler.cpp
-    main.cpp
+        src/mod/objects.c
+        src/core.cpp
+        src/io.cpp
+        src/handler.cpp
+        main.cpp
+        include/types/iobject.h
+        include/types/number.hpp
+        include/types/rational.hpp
+        include/types/vector.hpp
+        include/types/matrix.hpp
 )
 
 # Добавляем исполняемый файл
-add_executable(math_interpreter ${SOURCES})
+add_executable(math_interpreter ${SOURCES} )
 
 # Для тестирования: Создаем отдельные исполняемые файлы для каждого теста
 # Включаем тесты, если CMake будет вызван с флагом -DBUILD_TESTS=ON

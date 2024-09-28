@@ -28,10 +28,48 @@
  */
 
 
-#ifndef _MOD_OBJECTS_H_
-#define _MOD_OBJECTS_H_
-
+#ifndef MOD_OBJECTS_H_
+#define MOD_OBJECTS_H_
 #include <pthread.h>
+// Определяем макрос для слотов
+#define public_slot public
+#define protected_slot protected
+#define private_slot private
+
+#define public_signal public
+#define protected_signal protected
+#define private_signal private_signal
+
+// Проверочный макрос
+#define CHECK_SLOTS_ONLY static_assert(true, "This section should contain only slots!");
+
+#define MI_API
+
+// Проверочный макрос
+#define CHECK_SLOTS_ONLY static_assert(true, "This section should contain only slots!");
+
+#define CREATE_SLOT(func, args) ((Slot){.func = func, .args = args})
+#define CREATE_SIGNAL(capacity) ((Signal){.slots = malloc(sizeof(Slot) * capacity), .capacity = capacity, .count = 0, .mutex = PTHREAD_MUTEX_INITIALIZER})
+#define ADD_SLOT_TO_SIGNAL(signal, slot)                          \
+    do {                                                          \
+    pthread_mutex_lock(&(signal).mutex);                      \
+    if ((signal).count >= (signal).capacity) {                \
+    (signal).capacity *= 2;                               \
+    (signal).slots = realloc((signal).slots, sizeof(Slot) * (signal).capacity); \
+    }                                                         \
+    (signal).slots[(signal).count++] = slot;                  \
+    pthread_mutex_unlock(&(signal).mutex);                    \
+} while(0)
+
+#define EMIT_SIGNAL(signal)                                   \
+do {                                                          \
+   pthread_mutex_lock(&(signal).mutex);                       \
+   for (int i = 0; i < (signal).count; ++i) {                 \
+   (signal).slots[i].func((signal).slots[i].args);            \
+   }                                                          \
+   pthread_mutex_unlock(&(signal).mutex);                     \
+} while(0)
+
 /**
  * @brief Function pointer type for slot functions.
  *
@@ -102,7 +140,7 @@ void expand_slots(Signal *signal);
  * @param func Function pointer for the slot function.
  * @param args Arguments for the slot function.
  */
-void connect_slot(Signal *signal, func_t func, void *args);
+void connect_slot(Signal *signal, const func_t func, void *args);
 
 /**
  * @brief Disconnects a slot from a signal.
@@ -114,7 +152,7 @@ void connect_slot(Signal *signal, func_t func, void *args);
  * @param signal Pointer to the Signal object from which the slot should be disconnected.
  * @param func Function pointer to the slot function that should be disconnected.
  */
-void disconnect_slot(Signal *signal, func_t func);
+void disconnect_slot(Signal *signal, const func_t func);
 
 /**
  * @brief Disconnects all slots from a signal.
@@ -136,4 +174,4 @@ void disconnect_all_slots(Signal *signal);
  */
 void emit_signal(Signal *signal, void *data);
 
-#endif // _MOD_OBJECTS_H_
+#endif // MOD_OBJECTS_H_
