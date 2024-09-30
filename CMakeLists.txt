@@ -4,7 +4,8 @@ project(MathInterpreter)
 # Устанавливаем стандарт C++23
 set(CMAKE_CXX_STANDARD 23)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
-
+set(CMAKE_C_STANDARD 23)
+set(CMAKE_C_STANDARD_REQUIRED ON)
 # Добавляем путь к заголовочным файлам
 include_directories(${CMAKE_SOURCE_DIR}/include)
 

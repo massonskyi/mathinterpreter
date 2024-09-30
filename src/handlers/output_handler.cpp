@@ -28,8 +28,10 @@
  */
 #include "../../include/handlers/output_handler.h"
 #include <iostream>
+#include <sstream>
+#include <format>
 
-OutputHandler::OutputHandler(bool enable_color, std::optional<const char*> global_format)
+OutputHandler::OutputHandler(bool enable_color, std::optional<std::string> global_format)
 : color_enabled(enable_color), global_format(global_format) {
     custom_color.fill(std::nullopt); ///<- Initialization array custom_color
 };
@@ -38,47 +40,47 @@ void OutputHandler::set_color_enabled(bool enabled) {
     color_enabled = enabled;
 };
 
-void OutputHandler::set_custom_color(Color color, const char* code) {
+void OutputHandler::set_custom_color(Color color, std::string code) {
     custom_color[static_cast<int>(color)] = code;
 };
 
-void OutputHandler::set_global_format(const char* format) {
+void OutputHandler::set_global_format(std::string format) {
     global_format = format;
 };
 
-void OutputHandler::err(const char* text) const {
+void OutputHandler::err(std::string text) const {
     print(text, Color::Red);
 };
 
-void OutputHandler::debug(const char* text) const {
+void OutputHandler::debug(std::string text) const {
     print(text, Color::Green);
 };
 
-void OutputHandler::info(const char* text) const {
+void OutputHandler::info(std::string text) const {
     print(text, Color::Blue);
 };
 
-void OutputHandler::warn(const char* text) const {
+void OutputHandler::warn(std::string text) const {
     print(text, Color::Yellow);
 };
 
-void OutputHandler::success(const char* text) const {
+void OutputHandler::success(std::string text) const {
     print(text, Color::Green);
 };
 
-void OutputHandler::critical(const char* text) const {
+void OutputHandler::critical(std::string text) const {
     print(text, Color::Red);
 };
 
-void OutputHandler::fatal(const char* text) const {
+void OutputHandler::fatal(std::string text) const {
     print(text, Color::Red);
 };
 
-void OutputHandler::trace(const char* text) const {
+void OutputHandler::trace(std::string text) const {
     print(text, Color::Cyan);
 };
 
-void OutputHandler::print(const char* text, Color color) const {
+void OutputHandler::print(std::string text, Color color) const {
     if (color_enabled) {
         if (custom_color[static_cast<int>(color)]) {
             std::cout << "\033[" << custom_color[static_cast<int>(color)].value() << "m";
@@ -87,9 +89,10 @@ void OutputHandler::print(const char* text, Color color) const {
         }
     }
     if (global_format) {
-        char buffer[1024];
-        std::snprintf(buffer, sizeof(buffer), global_format.value(), text);
-        std::cout << buffer;
+        std::ostringstream oss;
+        oss << global_format.value();
+        std::string formatted_text = oss.str();
+        std::cout << formatted_text;
     } else {
         std::cout << text;
     }
@@ -99,14 +102,13 @@ void OutputHandler::print(const char* text, Color color) const {
 };
 
 template<typename... Args>
-void OutputHandler::formatted(Color color, const char* formatString, Args&&... args) const {
-    char formattedMessage[1024];
-    std::snprintf(formattedMessage, sizeof(formattedMessage), formatString, std::forward<Args>(args)...);
+void OutputHandler::formatted(Color color, std::string formatString, Args&&... args) const {
+    std::string formattedMessage = std::format(formatString, std::forward<Args>(args)...);
     
-    // Если установлен глобальный формат, используем его
     if (global_format.has_value()) {
-        char globalFormattedMessage[1024];
-        std::snprintf(globalFormattedMessage, sizeof(globalFormattedMessage), global_format.value(), formattedMessage);
+        std::ostringstream global_oss;
+        global_oss << std::format(global_format.value(), formattedMessage);
+        std::string globalFormattedMessage = global_oss.str();
         print(globalFormattedMessage, color);
     } else {
         print(formattedMessage, color);

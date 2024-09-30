@@ -12,7 +12,7 @@
                 "/usr/local/include"
             ],
             "defines": [],
-            "compilerPath": null,
+            "compilerPath": "/usr/bin/gcc-13",
             "cStandard": "c23",
             "cppStandard": "gnu++23",
             "intelliSenseMode": "linux-gcc-x64"

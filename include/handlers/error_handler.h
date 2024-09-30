@@ -30,7 +30,7 @@
 #ifndef ERROR_HANDLER_H_
 #define ERROR_HANDLER_H_
 
-#include <cstddef>
+#include <string>
 #include "output_handler.h"
 
 /**
@@ -58,14 +58,14 @@ public:
      * @param input The input string where the error occurred.
      * @param type The type of error to handle.
      */
-    void handle(const char* input, const char* type);
+    void handle(std::string& input, std::string& type);
     /**
      * @brief Provides a recommendation based on the error type.
      * 
      * @param type The type of error.
      * @return A recommendation string for the given error type.
      */
-    const char* get_recommendation(const char* type);
+    std::string get_recommendation(const std::string&  type);
 
     /** 
      * @brief Checks for syntax errors in the input string.(deprecated)
@@ -73,7 +73,7 @@ public:
      * @param input The input string to check.
      * @return True if a syntax error is found, false otherwise.
      */
-    bool check_syntax_error(const char* input);
+    bool check_syntax_error(std::string& input);
     
     /** 
      * @brief Checks for syntax errors in the input string.
@@ -81,21 +81,21 @@ public:
      * @param input The input string to check.
      * @return True if a syntax error is found, false otherwise.
      */
-    bool check_all_syntax_error(const char* input);
+    bool check_all_syntax_error(std::string&input);
     
     /** 
      * @brief Shows the position of the error in the input string.
      * 
      * @param input The input string where the error occurred.
      */
-    void show_error_position(const char* input);
+    void show_error_position(std::string& input);
     
     /**
      * @brief Indicates the position of the error in the input string.
      * 
      * @param input The input string where the error occurred.
      */
-    void indicate_error_position(const char* input);
+    void indicate_error_position(std::string&input);
     
     /** 
      * @brief Prints a pointer to the error position in the input string.
@@ -103,8 +103,8 @@ public:
      * @param input The input string where the error occurred.
      * @param position The position of the error in the input string.
      */
-    void print_error_pointer(const char* input, size_t position);
-    bool input_checked_types(const char* input);
+    void print_error_pointer(std::string& input, size_t position);
+    bool input_checked_types(std::string& input);
 
 private:
     OutputHandler out; ///< The printer object for error handling.

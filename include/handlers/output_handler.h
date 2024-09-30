@@ -31,6 +31,7 @@
 #ifndef OUTPUT_HANDLER_H_
 #define OUTPUT_HANDLER_H_
 
+#include <string>
 #include <optional>
 #include <array>
 /**
@@ -64,7 +65,7 @@ public:
      * @param enable_color A boolean to enable or disable color output. Default is true.
      * @param global_format The format string to use globally.
      */
-    explicit OutputHandler(bool enable_color = true, std::optional<const char*> global_format = std::nullopt);
+    explicit OutputHandler(bool enable_color = true, std::optional<std::string> global_format = std::nullopt);
 
     /**
      * @brief Set whether color output is enabled.
@@ -79,14 +80,14 @@ public:
      * @param color The color to set.
      * @param code The ANSI code for the custom color.
      */
-    void set_custom_color(Color color, const char* code);
+    void set_custom_color(Color color, std::string code);
 
     /**
      * @brief Set a global format for all printed text.
      * 
      * @param format The format string to use globally.
      */
-    void set_global_format(const char* format);
+    void set_global_format(std::string format);
 
     /**
      * @brief Print text with a specified color.
@@ -94,62 +95,62 @@ public:
      * @param text The text to print.
      * @param color The color to use for the text. Default is Color::Reset.
      */
-    void print(const char* text, Color color = Color::Reset) const;
+    void print(std::string text, Color color = Color::Reset) const;
     /**
      * @brief Print an error message with red text.
      * 
      * @param text The error message to print.
      */
-    void err(const char* text) const;
+    void err(std::string text) const;
 
     /**
      * @brief Print formatted text with a specified color.
      * 
      * @param text The text to print.
      */
-    void debug(const char* text) const;
+    void debug(std::string text) const;
 
     /**
      * @brief Print formatted text with a specified color.
      * 
      * @param text The text to print.
      */
-    void info(const char* text) const;
+    void info(std::string text) const;
 
     /**
      * @brief Print formatted text with a specified color.
      * 
      * @param text The text to print.
      */
-    void warn(const char* text) const;
+    void warn(std::string text) const;
 
     /**
      * @brief Print formatted text with a specified color.
      * 
      * @param text The text to print.
      */
-    void success(const char* text) const;
+    void success(std::string text) const;
 
     /**
      * @brief Print formatted text with a specified color.
      * 
      * @param text The text to print.
      */
-    void critical(const char* text) const;
+    void critical(std::string text) const;
 
     /**
      * @brief Print formatted text with a specified color.
      * 
      * @param text The text to print.
      */
-    void fatal(const char* text) const;
+    void fatal(std::string text) const;
 
     /**
      * @brief Print formatted text with a specified color.
      * 
      * @param text The text to print.
      */
-    void trace(const char* text) const;
+    void trace(std::string text) const;
 
     /**
      * @brief Print formatted text with a specified color.
@@ -160,11 +161,11 @@ public:
      * @param args The arguments for the format string.
      */
     template<typename... Args>
-    void formatted(Color color, const char* formatString, Args&&... args) const;
+    void formatted(Color color, std::string formatString, Args&&... args) const;
     
 private:
     bool color_enabled; ///< Boolean indicating if color output is enabled.    
-    std::optional<const char*> global_format; ///< Optional global format string.
-    std::array<std::optional<const char*>, 256> custom_color; ///< Array of optional custom ANSI codes for colors.
+    std::optional<std::string> global_format; ///< Optional global format string.
+    std::array<std::optional<std::string>, 256> custom_color; ///< Array of optional custom ANSI codes for colors.
 };
 #endif // OUTPUT_HANDLER_H_

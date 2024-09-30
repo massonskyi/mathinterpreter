@@ -97,7 +97,10 @@
         "ios": "cpp",
         "__split_buffer": "cpp",
         "queue": "cpp",
-        "stack": "cpp"
+        "stack": "cpp",
+        "filesystem": "cpp",
+        "valarray": "cpp",
+        "stdfloat": "cpp"
     },
     "cSpell.words": [
         "FUNCTOOLS"

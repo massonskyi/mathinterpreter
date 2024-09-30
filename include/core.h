@@ -27,3 +27,75 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 #pragma once
+
+#ifndef __CORE_H__
+#define __CORE_H__
+
+#include <vector>
+#include <memory>
+#include "handlers/error_handler.h"
+#include "types/types.h"
+
+using Number = float;
+
+/**
+ * @brief Token is type of token
+
+ */
+struct Token{
+    enum Type{
+        Number,
+        Operator,
+        LeftParen,
+        RightParen,
+        End
+    }type;
+    std::string value;
+
+    Token(Type t, std::string v): type(t), value(v) {}
+};
+
+
+
+class ExpressionParser{
+public:
+    ExpressionParser() = default;
+    explicit ExpressionParser(std::string &input);
+
+    std::vector<Token> parse();
+private:
+    std::string input;
+    size_t pos;
+    
+    Token nextToken();
+};
+
+
+
+class Evaluator{
+public:
+    Evaluator() = default;
+    explicit Evaluator(const std::vector<Token>& tokens);
+    Number evaluate();
+    
+
+    template<typename _Tp>
+    Vector<_Tp> evaluateVector();
+
+    template<typename _Tp>
+    Matrix<_Tp> evaluateMatrix();
+
+    template<typename _Tp>
+    Rational<_Tp> evaluateRational();
+
+private:
+
+    std::vector<Token> tokens;
+    size_t pos;
+
+    Number parseExpression();
+    Number parseTerm();
+    Number parseFactor();
+
+};
+#endif // __CORE_H__

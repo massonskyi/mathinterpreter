@@ -27,3 +27,101 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 #pragma once
+#ifndef __INTERPRETER_H__
+#define __INTERPRETER_H__
+#include "core.h"
+#include <sstream> // Для std::stringstream
+#include <stdexcept> // Для std::invalid_argument
+#include <string> // Для std::string
+class Interpreter{
+public:
+    Interpreter();
+
+    Number interpret(std::string& expression);
+    
+
+    // Реализация шаблонной функции для векторов
+    template<typename _Tp>
+    Vector<_Tp> interpretVector(const std::string& expression) {
+        std::stringstream ss(expression);
+        char temp;
+        ss >> temp; // Ожидаем '['
+        
+        if (temp != '[') {
+            throw std::invalid_argument("Invalid vector format");
+        }
+
+        Vector<_Tp> result;
+        _Tp value;
+        
+        while (ss >> value) {
+            result.push_back(value);
+            ss >> temp; // Считываем разделитель или закрывающую скобку ']'
+            if (temp == ']') {
+                break;
+            }
+        }
+
+        if (temp != ']') {
+            throw std::invalid_argument("Invalid vector format");
+        }
+
+        return result;
+    }
+
+
+    // Реализация шаблонной функции для матриц
+    template<typename _Tp>
+    Matrix<_Tp> interpretMatrix(const std::string& expression) {
+        std::stringstream ss(expression);
+        char temp;
+        ss >> temp; // Ожидаем '['
+        
+        if (temp != '[') {
+            throw std::invalid_argument("Invalid matrix format");
+        }
+
+        Matrix<_Tp> result;
+        std::vector<_Tp> row;
+        _Tp value;
+
+        while (ss >> value) {
+            row.push_back(value);
+            ss >> temp; // Считываем разделитель (например, пробел или ';')
+            if (temp == ';') {
+                result.push_back(row);
+                row.clear();
+            } else if (temp == ']') {
+                result.push_back(row);
+                break;
+            }
+        }
+
+        if (temp != ']') {
+            throw std::invalid_argument("Invalid matrix format");
+        }
+
+        return result;
+    }
+
+    // Реализация шаблонной функции для рациональных чисел
+    template<typename _Tp>
+    Rational<_Tp> interpretRational(const std::string& expression) {
+        std::stringstream ss(expression);
+        _Tp numerator, denominator;
+        char slash;
+
+        ss >> numerator >> slash >> denominator;
+        
+        if (slash != '/' || denominator == 0) {
+            throw std::invalid_argument("Invalid rational number format or division by zero");
+        }
+
+        return Rational(numerator, denominator);
+    }
+
+private:
+    std::shared_ptr<ErrorHandler> errorHandler;
+};
+
+#endif // __INTERPRETER_H__

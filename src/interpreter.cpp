@@ -1,5 +1,5 @@
 /*
- * COPYRIGHT (c) 2024 Massonskyi
+* COPYRIGHT (c) 2024 Massonskyi
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -26,61 +26,26 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE.
  */
-#include "../include/core.h"
-#include <cstring>  // Для strlen
 
-ExpressionParser::ExpressionParser(std::string& intput) : input(intput), pos(0) {}
+#include "../include/interpreter.h"
 
-// If InterpreterError is not defined in errors.h, define it here
-class InterpreterError : public std::runtime_error {
-public:
-    explicit InterpreterError(const std::string& message) : std::runtime_error(message) {}
-};
 
-std::vector<Token> ExpressionParser::parse(){
-    std::vector<Token> tokens;
+Interpreter::Interpreter() : errorHandler(nullptr) {}
 
-    Token token = nextToken();
-    while(token.type != Token::End){
-        tokens.push_back(token);
-        token = nextToken();
-    }
-    return tokens;
-}
+Number Interpreter::interpret(std::string& expression){
+    try{
+        ExpressionParser parser(expression);
 
-Token ExpressionParser::nextToken(){
-    while(pos < input.size() && std::isspace(input[pos])){
-        ++pos;
-    }
+        auto tokens = parser.parse();
 
-    if(pos == input.size()){
-        return Token(Token::End,  "\0");
-    }
-
-    char current = input[pos];
-
-    if (std::isdigit(current)) {
-        std::string number;
-        while (pos < input.size() && (std::isdigit(input[pos]) || input[pos] == '.')) {
-            number += input[pos++];
+        Evaluator evaluator(tokens);
+        return evaluator.evaluate();
+    }catch(const std::exception& ex){
+        if(errorHandler){
+            std::string errorMsg(ex.what());
+            std::string errorType(std::string("Unknown error"));
+            errorHandler->handle(errorMsg, errorType);
         }
-        return Token(Token::Number, number);
+        return -1;
     }
-
-    if (current == '+' || current == '-' || current == '*' || current == '/') {
-        pos++;
-        return Token(Token::Operator, std::string(1, current));
-    }
-
-    if (current == '(') {
-        pos++;
-        return Token(Token::LeftParen, "(");
-    }
-
-    if (current == ')') {
-        pos++;
-        return Token(Token::RightParen, ")");
-    }
-
-    throw InterpreterError("Unexpected character in input: " + std::string(1, current));
 }

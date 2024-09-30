@@ -36,17 +36,17 @@
 #include <string.h>
 
 ErrorHandler::ErrorHandler(bool enable_color) : out(enable_color) {}
-void ErrorHandler::handle(const char* input, const char* type) {
-    const char* recommendation = get_recommendation(type);
+void ErrorHandler::handle(std::string& input, std::string& type) {
+    std::string recommendation = get_recommendation(type);
 
     show_error_position(input);
 
-    if (recommendation != nullptr) {
-        char error_string[1024], input_string[1024], recommendation_string[1024];
+    if (!recommendation.empty()) {
+        char error_string[1024] = {0}, input_string[1024] = {0}, recommendation_string[1024] = {0};
 
-        std::snprintf(error_string, sizeof(error_string), "Error: %s\n", type);
-        std::snprintf(input_string, sizeof(input_string), "Input: %s\n", input);
-        std::snprintf(recommendation_string, sizeof(recommendation_string), "Recommendation: %s\n", recommendation);
+        std::snprintf(error_string, sizeof(error_string), "Error: %s\n", type.c_str());
+        std::snprintf(input_string, sizeof(input_string), "Input: %s\n", input.c_str());
+        std::snprintf(recommendation_string, sizeof(recommendation_string), "Recommendation: %s\n", recommendation.c_str());
 
         out.err(error_string);
         out.info(input_string);
@@ -54,29 +54,28 @@ void ErrorHandler::handle(const char* input, const char* type) {
     }
 }
 
-const char* ErrorHandler::get_recommendation(const char* type) {
-    if (strcmp(type, "Syntax Error") == 0) {
-        return "Check if all brackets and operators are placed correctly.";
+std::string ErrorHandler::get_recommendation(const std::string& type) {
+    if (type == "Syntax Error") {
+        return "Проверьте расстановку скобок и операторов. Пример: \"int a = 5 + [2 * 3];\".";
     }
-    if (strcmp(type, "Unknown Variable") == 0) {
-        return "Ensure that the variable is defined before it is used.";
+    if (type == "Unknown Variable") {
+        return "Убедитесь, что переменная определена перед её использованием. Пример: \"int x; x = 5;\".";
     }
-    if (strcmp(type, "Invalid Operation") == 0) {
-        return "Check if the operation is supported for the given data types.";
+    if (type == "Invalid Operation") {
+        return "Проверьте, поддерживается ли операция для указанных типов данных. Пример: \"int a = 5 / 0;\".";
     }
-    if (strcmp(type, "Division by Zero") == 0) {
-        return "Rational numbers cannot be divided by zero. Correct the denominator.";
+    if (type == "Division by Zero") {
+        return "Нельзя делить на ноль. Исправьте знаменатель. Пример: \"double x = 1.0 / (a != 0 ? a : 1);\".";
     }
-    if (strcmp(type, "Unmatched Bracket") == 0) {
-        return "Ensure all brackets are closed properly.";
+    if (type == "Unmatched Bracket") {
+        return "Проверьте корректность закрытия скобок. Пример: \"int f = [5 + 3] * 2;\".";
     }
-    if (strcmp(type, "Invalid Type") == 0) {
-        return "Invalid type. Check the syntax and logic.";
+    if (type == "Invalid Type") {
+        return "Недопустимый тип. Проверьте синтаксис и логику. Пример: \"int x = 5;\".";
     }
-    return "Unknown error. Check the syntax and logic.";
+    return "Неизвестная ошибка. Проверьте синтаксис и логику программы.";
 }
-
-void ErrorHandler::show_error_position(const char* input) {
+void ErrorHandler::show_error_position(std::string& input) {
     if (check_syntax_error(input)) {
         out.err("Syntax Error: Unmatched brackets\n");
         indicate_error_position(input);
@@ -88,9 +87,9 @@ void ErrorHandler::show_error_position(const char* input) {
     }
 }
 
-bool ErrorHandler::check_syntax_error(const char* input) {
+bool ErrorHandler::check_syntax_error(std::string& input) {
     int open_bracket = 0;
-    for (size_t i = 0; i < strlen(input); i++) {
+    for (size_t i = 0; i < input.size(); i++) {
         if (input[i] == '[') {
             open_bracket++;
         } else if (input[i] == ']') {
@@ -101,10 +100,10 @@ bool ErrorHandler::check_syntax_error(const char* input) {
 }
 
 
-void ErrorHandler::indicate_error_position(const char* input) {
+void ErrorHandler::indicate_error_position(std::string& input) {
     char error_string[1024];
     int openBrackets = 0;
-    for (size_t i = 0; i < strlen(input); ++i) {
+    for (size_t i = 0; i < input.size(); ++i) {
         if (input[i] == '[') openBrackets++;
         if (input[i] == ']') openBrackets--;
         if (openBrackets < 0) {
@@ -115,26 +114,26 @@ void ErrorHandler::indicate_error_position(const char* input) {
         }
     }
     if (openBrackets > 0) {
-        std::snprintf(error_string, sizeof(error_string), "Error position: %zu (missing closing ']')\n", strlen(input) + 1);
+        std::snprintf(error_string, sizeof(error_string), "Error position: %zu (missing closing ']')\n", input.size() + 1);
         out.err(error_string);
-        print_error_pointer(input, strlen(input));
+        print_error_pointer(input, input.size());
     }
 }
 
-void ErrorHandler::print_error_pointer(const char* input, size_t position) {
+void ErrorHandler::print_error_pointer(std::string& input, size_t position) {
     std::string error_pointer(position, ' ');
     error_pointer += "^";
     out.err(error_pointer.c_str());
 }
 
-bool ErrorHandler::input_checked_types(const char* input) {
-    std::regex typeRegex("\\b(int|float)\\b");
+bool ErrorHandler::input_checked_types(std::string& input) {
+    std::regex typeRegex("\\b(int|float|double|char|bool|string)\\b");
     std::smatch match;
     std::string inputString(input);
 
     while (std::regex_search(inputString, match, typeRegex)) {
         std::string type = match.str(0);
-        if (type != "int" && type != "float" && type != "double" && type != "char") {
+        if (type != "int" && type != "float" && type != "double" && type != "char" && type != "bool" && type != "string") {
             return true;
         }
         inputString = match.suffix().str();
@@ -142,4 +141,3 @@ bool ErrorHandler::input_checked_types(const char* input) {
 
     return false;
 }
-
